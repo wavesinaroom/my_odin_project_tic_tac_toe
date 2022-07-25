@@ -1,1 +1,3 @@
-alert("Working");
+function GameBoard (){
+  const tiles = [9];
+}
