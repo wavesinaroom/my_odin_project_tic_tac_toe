@@ -4,8 +4,8 @@ function GameBoard (){
 }
 
 enum PlayerToken{
-  naughts,
-  crosses,
+  even,
+  odd,
 }
 
 function Player(name:string, token:PlayerToken, score:int){
