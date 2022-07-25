@@ -4,15 +4,15 @@ const PlayerToken={
   none: Symbol("none")
 };
 
-function Player(name, token, score){
+const Player=(name, token, score)=>{
   return name, token, score;
 }
 
-function Tile(value, player){
+const Tile = (value, player) =>{
   return value, player;
 }
 
-function GameBoard (){
+const GameBoard = (()=>{
 
   const gameBoardSize = 3;
   let tiles = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
@@ -21,9 +21,11 @@ function GameBoard (){
   {
     for(let k = 0; k < gameBoardSize; ++k)
     {
-      this.tiles[i][k] = new Tile(0,none);
-      console.log(this.tiles[i][k]);
+      tiles[i][k] = Tile(0,none);
+      console.log(tiles[i][k]);
     }
   }
   return tiles;
-}
+})();
+
+//Game Manager
