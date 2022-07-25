@@ -21,7 +21,7 @@ const GameBoard = (()=>{
   {
     for(let k = 0; k < gameBoardSize; ++k)
     {
-      tiles[i][k] = Tile(0,none);
+      tiles[i][k] = Tile(0,PlayerToken.none);
       console.log(tiles[i][k]);
     }
   }
