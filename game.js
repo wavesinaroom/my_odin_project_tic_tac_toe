@@ -43,7 +43,7 @@ const GameManager = (()=>{
   let score = [2];
 
   const StartGame = () => {
-    if(gameBoard==null)
+    if(gameBoard == undefined)
     {
       gameBoard = GameBoard();
     }else{
@@ -51,7 +51,16 @@ const GameManager = (()=>{
     }
   }
 
-  return(StartGame);
+  const ResetGame = () =>{
+    if(gameBoard != undefined)
+    {
+      gameBoard = undefined;
+      gameBoard = GameBoard();
+    }else{
+      gameBoard = GameBoard();
+    }
+  }
+  return StartGame, ResetGame;
 
 })();
 
