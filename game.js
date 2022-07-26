@@ -46,4 +46,26 @@ GameManager.prototype.StartGame = function(){
 
 }
 
-GameManager.SetupGameMode
+GameManager.prototype.SetUpGameMode = function(){
+
+}
+
+GameManager.prototype.SetUpPlayers = function (){
+
+}
+
+GameManager.prototype.ManageGameTurn = function(){
+
+}
+
+GameManager.prototype.SetScore = function(){
+
+}
+
+GameManager.prototype.AnnounceWinner = function(){
+
+}
+
+GameManager.prototype.ResetGame = function(){
+  
+}
