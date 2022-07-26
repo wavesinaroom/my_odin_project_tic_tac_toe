@@ -9,8 +9,8 @@ const GameMode={
   PvCPU: Symbol("PvCP")
 }
 
-const Player=(name, token, score, winner)=>{
-  return name, token, score, winner;
+const Player=(name, token)=>{
+  return name, token, score, isWinner, turn;
 }
 
 const Tile = (value, player) =>{
@@ -38,7 +38,7 @@ const GameBoard = (()=>{
 const GameManager = (()=>{
   let gameBoard;
   let gameMode;
-  let players = [2];
+  let players=[2];
   let turn = 0;
   let score = [2];
 
@@ -60,18 +60,25 @@ const GameManager = (()=>{
       gameBoard = GameBoard();
     }
   }
-  return StartGame, ResetGame;
+
+  const SetUpGameMode = (chosenGameMode) => {
+    gameMode = chosenGameMode;
+    return gameMode;
+  }
+
+  const SetUpPlayers = (playerOneName, playerOneToken, playerTwoName, playerTwoToken) => {
+    players[0] = Player(playerOneName, playerOneToken);
+    players[1] = Player(playerTwoName, playerTwoToken);
+    return players;
+  }
+
+  return StartGame, ResetGame, SetUpGameMode, SetUpPlayers;
 
 })();
 
 
-GameManager.prototype.SetUpGameMode = function(){
 
-}
 
-GameManager.prototype.SetUpPlayers = function (){
-
-}
 
 GameManager.prototype.ManageGameTurn = function(){
 
