@@ -69,6 +69,24 @@ const GameManager = (()=>{
   const SetUpPlayers = (playerOneName, playerOneToken, playerTwoName, playerTwoToken) => {
     players[0] = Player(playerOneName, playerOneToken);
     players[1] = Player(playerTwoName, playerTwoToken);
+
+    if(playerTwoName==undefined&&playerTwoToken==undefined)
+    {
+      if(playerOneToken==PlayerToken.even)
+      {
+        players[1] = Player("CPU", PlayerToken.odd);
+      }else if(playerOneToken==PlayerToken.odd)
+      {
+        players[1] = Player("CPU", PlayerToken.even);
+      }else{
+        return;
+      }
+    }
+
+    if(playerOneName==undefined||playerOneToken==undefined||playerTwoName==undefined||playerTwoToken==undefined)
+    {
+      return; 
+    }
     return players;
   }
 
