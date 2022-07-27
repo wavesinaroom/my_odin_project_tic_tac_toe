@@ -6,7 +6,7 @@ const PlayerToken={
 
 const GameMode={
   PvP: Symbol("PvP"),
-  PvCPU: Symbol("PvCP")
+  PvCPU: Symbol("PvCPU")
 }
 
 const Player=(name, token)=>{
@@ -36,6 +36,8 @@ const GameBoard = (()=>{
 
 //Game Manager
 const GameManager = (()=>{
+  const numberGameTurn = 5;
+
   let gameBoard;
   let gameMode;
   let players=[2];
@@ -43,6 +45,7 @@ const GameManager = (()=>{
   let score = [2];
 
   const StartGame = () => {
+    console.log("I'm working");
     if(gameBoard == undefined)
     {
       gameBoard = GameBoard();
@@ -85,31 +88,36 @@ const GameManager = (()=>{
 
     if(playerOneName==undefined||playerOneToken==undefined||playerTwoName==undefined||playerTwoToken==undefined)
     {
-      return; 
+      return;
     }
     return players;
   }
 
-  return StartGame, ResetGame, SetUpGameMode, SetUpPlayers;
+  const ManageGameTurn = () => {
+    if(turn==numberGameTurn)
+    {
+      if(players[0].score>players[1].score)
+      {
+        console.log("Winner: " + players[0].name);
+      }else if(players[1].score>players[0].score)
+      {
+        console.log("Winner: " + players[1].name);
+      }
+    }
+
+    //Check sum in rows
+
+    //Check sum in columns
+
+    if(players[0].turn == true && players[1]. turn == true)
+    {
+      ++turn;
+    }else
+    {
+      return;
+    }
+  }
+
+  return StartGame, ResetGame, SetUpGameMode, SetUpPlayers, ManageGameTurn;
 
 })();
-
-
-
-
-
-GameManager.prototype.ManageGameTurn = function(){
-
-}
-
-GameManager.prototype.SetScore = function(){
-
-}
-
-GameManager.prototype.AnnounceWinner = function(){
-
-}
-
-GameManager.prototype.ResetGame = function(){
-
-}
