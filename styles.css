@@ -7,3 +7,7 @@ body
 {
   background-color: var(--waves-orange);
 }
+
+.boardDiv {
+  display: grid;
+}

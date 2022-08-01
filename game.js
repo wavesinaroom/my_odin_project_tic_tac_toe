@@ -25,18 +25,21 @@ const GameBoard = (()=>{
 
   let board = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
   let boardDiv = document.createElement('div');
+  boardDiv.className = "boardDiv";
   documentBody.appendChild(boardDiv);
 
-  for(let col = 0; col < gameBoardSize; ++col)
+  for(let row = 0; row < gameBoardSize; ++row)
   {
-    let colTd = document.createElement('td');
-    for(let row = 0; row < gameBoardSize; ++row)
+    let boardRow = document.createElement('td');
+    boardRow.className = "boardRow";
+    for(let col = 0; col < gameBoardSize; ++col)
     {
-      board[col][row] = Tile(1, PlayerToken.none, document.createElement('td'));
-      colTd.appendChild(board[col][row].htmlCell);
-      board[col][row].htmlCell.textContent = "Yo";
+      board[row][col] = Tile(1, PlayerToken.none, document.createElement('td'));
+      board[row][col].htmlCell.className = "cell";
+      boardRow.appendChild(board[row][col].htmlCell);
+      board[row][col].htmlCell.textContent = "Yo";
     }
-    boardDiv.appendChild(colTd);
+    boardDiv.appendChild(boardRow);
   }
   return board;
 })();
@@ -115,7 +118,7 @@ const GameManager = (()=>{
       }
     }
 
-    //Check sum in rows
+    //Check sum in cols
     for(let i = 0 ; i < gameBoardSize; ++i)
     {
       if(board[i][0]+board[i][1]+board[i][2]==scorePointSum)
