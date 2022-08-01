@@ -1,4 +1,4 @@
-documentBody: document.body;
+documentBody = document.body;
 
 const PlayerToken={
   even: Symbol("even"),
@@ -15,35 +15,32 @@ const Player=(name, token)=>{
   return name, token, score, isWinner, turn;
 }
 
-const Tile = (cellValue, playerToken) =>{
-  return {cellValue, playerToken};
+const Tile = (cellValue, playerToken, htmlCell) =>{
+  return {cellValue, playerToken, htmlCell};
 }
 
-let myTile = Tile(1, PlayerToken.even);
-console.log("value: %d, token: %s", myTile.cellValue, myTile.playerToken.toString());
-
-/*
 const GameBoard = (()=>{
 
   const gameBoardSize = 3;
-  let board = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
 
-    for(let i = 0; i < gameBoardSize; ++i)
+  let board = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
+  let boardDiv = document.createElement('div');
+  documentBody.appendChild(boardDiv);
+
+  for(let col = 0; col < gameBoardSize; ++col)
+  {
+    let colTd = document.createElement('td');
+    for(let row = 0; row < gameBoardSize; ++row)
     {
-      //let row = document.createElement('td');
-      //documentBody.appendChild(row);
-      for(let k = 0; k < gameBoardSize; ++k)
-      {
-        board[i][k] = Tile(k, "none");
-        console.log("player: %d row: %d, column: %d", board[i][k].cellValue,i,k);
-        //let column = document.createElement('td');
-        //row.appendChild(column);
-        //row.textContent = "none";
-      }
+      board[col][row] = Tile(1, PlayerToken.none, document.createElement('td'));
+      colTd.appendChild(board[col][row].htmlCell);
+      board[col][row].htmlCell.textContent = "Yo";
     }
+    boardDiv.appendChild(colTd);
+  }
   return board;
 })();
-*/
+
 
 /*
 //Game Manager
