@@ -1,4 +1,9 @@
+:root{
+  --waves-orange: #ff9700;
+  --waves-black: #27272A;
+}
+
 body
 {
-  background-color: red;
+  background-color: var(--waves-orange);
 }
