@@ -15,8 +15,8 @@ const Player=(name, token)=>{
   return name, token, score, isWinner, turn;
 }
 
-const Tile = (cellValue, playerToken, htmlCell) =>{
-  return {cellValue, playerToken, htmlCell};
+const Tile = (tileValue, playerToken, htmlTile) =>{
+  return {tileValue, playerToken, htmlTile};
 }
 
 const GameBoard = (()=>{
@@ -35,9 +35,9 @@ const GameBoard = (()=>{
     for(let col = 0; col < gameBoardSize; ++col)
     {
       board[row][col] = Tile(1, PlayerToken.none, document.createElement('td'));
-      board[row][col].htmlCell.className = "cell";
-      boardRow.appendChild(board[row][col].htmlCell);
-      board[row][col].htmlCell.textContent = "Yo";
+      board[row][col].htmlTile.className = "boardTile";
+      boardRow.appendChild(board[row][col].htmlTile);
+      board[row][col].htmlTile.textContent = "Yo";
     }
     boardDiv.appendChild(boardRow);
   }
