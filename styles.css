@@ -11,3 +11,7 @@ body
 .boardDiv {
   display: grid;
 }
+
+.boardDiv .boardRow .boardTile{
+  font-size: 120px;
+}
