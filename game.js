@@ -37,6 +37,7 @@ const GameBoard = (()=>{
 //Game Manager
 const GameManager = (()=>{
   const numberGameTurn = 5;
+  const scorePointSum = 15;
 
   let gameBoard;
   let gameMode;
@@ -106,8 +107,17 @@ const GameManager = (()=>{
     }
 
     //Check sum in rows
+    for(let i = 0 ; i < gameBoardSize; ++i)
+    {
+      if(board[i][0]+board[i][1]+board[i][2]==scorePointSum)
+      {
+        //score a point to a player
+      }else if(board[i][0]+board[1][i]+board[i][2]==scorePointSum)
+      {
+        //score a point to a player
+      }
 
-    //Check sum in columns
+    }
 
     if(players[0].turn == true && players[1]. turn == true)
     {
