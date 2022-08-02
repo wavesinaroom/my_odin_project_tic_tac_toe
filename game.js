@@ -75,7 +75,7 @@ const GameManager = (()=>{
       //EndGame;
     }
   }
-  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {playerInTurn,ManageGameTurn};
+  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn,ManageGameTurn};
 
 /*
   const numberGameTurn = 5;
@@ -149,6 +149,7 @@ const GameBoard = (()=>{
   boardDiv.className = "boardDiv";
   documentBody.appendChild(boardDiv);
 
+  //Tiles
   for(let row = 0; row < gameBoardSize; ++row)
   {
     let boardRow = document.createElement('td');
@@ -174,4 +175,50 @@ const GameBoard = (()=>{
     }
     boardDiv.appendChild(boardRow);
   }
+
+  //Players
+  let playersAreaHTML = document.createElement('div');
+  playersAreaHTML.className = "playersArea";
+  documentBody.appendChild(playersAreaHTML);
+
+  GameManager.players.forEach(player  => {
+    let playerHTML = document.createElement('div');
+    playerHTML.className = "player"
+    playersAreaHTML.appendChild(playerHTML);
+
+    let playerNameHTML = document.createElement('h1');
+    playerNameHTML.textContent = player.name;
+    playerHTML.appendChild(playerNameHTML);
+
+    let playerTokenHTML = document.createElement('p');
+    if(player.token==PlayerToken.even)
+    {
+      playerTokenHTML.textContent = "Even";
+    }else{
+      playerTokenHTML.textContent = "Odd";
+    }
+
+    playerHTML.appendChild(playerTokenHTML);
+
+    let playerNumbersArrayHTML = document.createElement('div');
+    playerNumbersArrayHTML.className = "playerNumbers";
+    playerHTML.appendChild(playerNumbersArrayHTML);
+
+    for(let i = 0; i<player.numbers.length; ++i)
+    {
+      let playerNumberHTML = document.createElement('p');
+      playerNumberHTML.textContent = player.numbers[i];
+      playerNumbersArrayHTML.appendChild(playerNumberHTML);
+    }
+
+  });
+
+
+
+
+
+
+
+
+
 })();
