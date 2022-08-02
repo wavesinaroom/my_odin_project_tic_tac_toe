@@ -36,13 +36,20 @@ const GameBoard = (()=>{
     {
       board[row][col] = Tile(1, PlayerToken.none, document.createElement('td'));
       board[row][col].htmlTile.className = "boardTile";
-      boardRow.appendChild(board[row][col].htmlTile);
       board[row][col].htmlTile.textContent = "Yo";
+      board[row][col].htmlTile.addEventListener('click', ()=>{
+        let inputNumber = prompt("Enter your number");
+        board[row][col].htmlTile.textContent = inputNumber;
+        board[row][col].tileValue = inputNumber;
+        //playerToken = GameManager.player playing
+        alert('yo');
+      });
+      boardRow.appendChild(board[row][col].htmlTile);
     }
     boardDiv.appendChild(boardRow);
   }
-  return board;
 })();
+
 
 
 /*
