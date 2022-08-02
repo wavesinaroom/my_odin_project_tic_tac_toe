@@ -149,6 +149,8 @@ const GameBoard = (()=>{
   boardDiv.className = "boardDiv";
   documentBody.appendChild(boardDiv);
 
+  let onClickPlayerValues = Player("init", PlayerToken.odd);
+  let onClickNumber;
   //Tiles
   for(let row = 0; row < gameBoardSize; ++row)
   {
@@ -164,10 +166,8 @@ const GameBoard = (()=>{
         if(board[row][col].tileToken!=undefined)
           throw 'Tile\'s already been taken';
 
-        let inputNumber = prompt("Enter your number");
-
-        board[row][col].htmlTile.textContent = inputNumber;
-        board[row][col].tileValue = inputNumber;
+        board[row][col].htmlTile.textContent = onClickNumber;
+        board[row][col].tileValue = onClickNumber;
         board[row][col].tileToken = GameManager.playerInTurn;
         GameManager.ManageGameTurn();
       });
@@ -208,6 +208,11 @@ const GameBoard = (()=>{
     {
       let playerNumberHTML = document.createElement('p');
       playerNumberHTML.textContent = player.numbers[i];
+      playerNumberHTML.addEventListener("click", () =>{
+        onClickPlayerValues.name = player.name;
+        GameManager.playerInTurn = player.token;
+        onClickNumber = player.numbers[i];
+      });
       playerNumbersArrayHTML.appendChild(playerNumberHTML);
     }
 
