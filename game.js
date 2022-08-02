@@ -136,14 +136,15 @@ const GameBoard = (()=>{
       board[row][col].htmlTile.textContent = "Yo";
       board[row][col].htmlTile.addEventListener('click', ()=>{
 
+        if(board[row][col].tileToken!=undefined)
+          throw 'Tile\'s already been taken';
+
         let inputNumber = prompt("Enter your number");
 
         board[row][col].htmlTile.textContent = inputNumber;
         board[row][col].tileValue = inputNumber;
         board[row][col].tileToken = GameManager.playerInTurn;
-        alert(GameManager.playerInTurn.toString());
-        alert('yo');
-        alert(board[row][col].tileToken.toString());
+
       });
       boardRow.appendChild(board[row][col].htmlTile);
     }
