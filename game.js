@@ -11,7 +11,31 @@ const GameMode={
 }
 
 const Player=(name, token)=>{
-  return {name, token};
+
+  let numbers = [];
+  let number;
+
+  if(token==PlayerToken.odd)
+  {
+    number = 1;
+    for(let i = 0; i<5; ++i)
+    {
+      numbers.push(number);
+      number+=2;
+    }
+  }else if(token==PlayerToken.even)
+  {
+    number = 2;
+    for(let i = 0; i<5; ++i)
+    {
+      numbers.push(number);
+      number+=2;
+    }
+  }else{
+    throw 'Can\'t create player';
+  }
+
+  return {name, token, numbers};
 }
 
 const Tile = (tileValue, tileToken, htmlTile) =>{
@@ -144,7 +168,7 @@ const GameBoard = (()=>{
         board[row][col].htmlTile.textContent = inputNumber;
         board[row][col].tileValue = inputNumber;
         board[row][col].tileToken = GameManager.playerInTurn;
-
+        GameManager.ManageGameTurn();
       });
       boardRow.appendChild(board[row][col].htmlTile);
     }
