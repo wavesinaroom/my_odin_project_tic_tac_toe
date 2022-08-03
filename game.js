@@ -50,20 +50,19 @@ const GameManager = (()=>{
   let players = [];
 
 
-  players[0] = Player("1", PlayerToken.even);
-  players[1] = Player("2", PlayerToken.odd);
+  players[0] = Player("Player 1", PlayerToken.even);
+  players[1] = Player("Player 2", PlayerToken.odd);
 
-  let playerInTurn = players[0].token;
-
+  let playerInTurn = players[0];
 
   const ManageGameTurn = () => {
 
-    if(playerInTurn==PlayerToken.even)
+    if(playerInTurn==players[0])
     {
-      playerInTurn=PlayerToken.odd;
-    }else if(playerInTurn==PlayerToken.odd)
+      playerInTurn=players[1];
+    }else if(playerInTurn==players[1])
     {
-      playerInTurn=PlayerToken.even;
+      playerInTurn=players[0];
     }else{
       throw "invalid value for player turn";
     }
@@ -75,69 +74,8 @@ const GameManager = (()=>{
       //EndGame;
     }
   }
-  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn,ManageGameTurn};
+  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn, ManageGameTurn};
 
-/*
-  const numberGameTurn = 5;
-  const scorePointSum = 15;
-
-  let gameBoard;
-  let gameMode;
-  let players=[2];
-  let turn = 0;
-  let score = [2];
-
-  const StartGame = () => {
-    console.log("I'm working");
-    if(gameBoard == undefined)
-    {
-      gameBoard = GameBoard();
-    }else{
-      return;
-    }
-  }
-
-  const ResetGame = () =>{
-    if(gameBoard != undefined)
-    {
-      gameBoard = undefined;
-      gameBoard = GameBoard();
-    }else{
-      gameBoard = GameBoard();
-    }
-  }
-
-  const SetUpGameMode = (chosenGameMode) => {
-    gameMode = chosenGameMode;
-    return gameMode;
-  }
-
-  const SetUpPlayers = (playerOneName, playerOneToken, playerTwoName, playerTwoToken) => {
-    players[0] = Player(playerOneName, playerOneToken);
-    players[1] = Player(playerTwoName, playerTwoToken);
-
-    if(playerTwoName==undefined&&playerTwoToken==undefined)
-    {
-      if(playerOneToken==PlayerToken.even)
-      {
-        players[1] = Player("CPU", PlayerToken.odd);
-      }else if(playerOneToken==PlayerToken.odd)
-      {
-        players[1] = Player("CPU", PlayerToken.even);
-      }else{
-        return;
-      }
-    }
-
-    if(playerOneName==undefined||playerOneToken==undefined||playerTwoName==undefined||playerTwoToken==undefined)
-    {
-      return;
-    }
-    return players;
-  }
-
-
-*/
 })();
 
 const GameBoard = (()=>{
@@ -168,9 +106,10 @@ const GameBoard = (()=>{
 
         board[row][col].htmlTile.textContent = onClickNumber;
         board[row][col].tileValue = onClickNumber;
-        board[row][col].tileToken = GameManager.playerInTurn;
-        turnDisplayHTML.textContent = GameManager.playerInTurn.toString();
+        board[row][col].tileToken = GameManager.playerInTurn.token;
         GameManager.ManageGameTurn();
+        alert(GameManager.playerInTurn.name);
+        turnDisplayHTML.textContent = GameManager.playerInTurn.name;
       });
       boardRow.appendChild(board[row][col].htmlTile);
     }
@@ -217,7 +156,7 @@ const GameBoard = (()=>{
       playerNumberHTML.textContent = player.numbers[i];
       playerNumberHTML.addEventListener("click", () =>{
         onClickPlayerValues.name = player.name;
-        GameManager.playerInTurn = player.token;
+        GameManager.playerInTurn = player;
         onClickNumber = player.numbers[i];
       });
       playerNumbersArrayHTML.appendChild(playerNumberHTML);
