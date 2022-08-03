@@ -169,12 +169,19 @@ const GameBoard = (()=>{
         board[row][col].htmlTile.textContent = onClickNumber;
         board[row][col].tileValue = onClickNumber;
         board[row][col].tileToken = GameManager.playerInTurn;
+        turnDisplayHTML.textContent = GameManager.playerInTurn.toString();
         GameManager.ManageGameTurn();
       });
       boardRow.appendChild(board[row][col].htmlTile);
     }
     boardDiv.appendChild(boardRow);
   }
+
+  //Turn Display
+  let turnDisplayHTML = document.createElement('p');
+  turnDisplayHTML.className = "turnDisplay";
+  turnDisplayHTML.textContent = "No one's turn";
+  documentBody.appendChild(turnDisplayHTML);
 
   //Players
   let playersAreaHTML = document.createElement('div');
