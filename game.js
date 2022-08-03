@@ -108,7 +108,6 @@ const GameBoard = (()=>{
         board[row][col].tileValue = onClickNumber;
         board[row][col].tileToken = GameManager.playerInTurn.token;
         GameManager.ManageGameTurn();
-        alert(GameManager.playerInTurn.name);
         turnDisplayHTML.textContent = GameManager.playerInTurn.name;
       });
       boardRow.appendChild(board[row][col].htmlTile);
