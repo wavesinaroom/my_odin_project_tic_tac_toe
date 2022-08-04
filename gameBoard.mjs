@@ -1,82 +1,8 @@
 documentBody = document.body;
 
-const PlayerToken={
-  even: Symbol("even"),
-  odd: Symbol("odd"),
-};
-
-const GameMode={
-  PvP: Symbol("PvP"),
-  PvCPU: Symbol("PvCPU")
-}
-
-const Player=(name, token)=>{
-
-  let numbers = [];
-  let number;
-
-  if(token==PlayerToken.odd)
-  {
-    number = 1;
-    for(let i = 0; i<5; ++i)
-    {
-      numbers.push(number);
-      number+=2;
-    }
-  }else if(token==PlayerToken.even)
-  {
-    number = 2;
-    for(let i = 0; i<5; ++i)
-    {
-      numbers.push(number);
-      number+=2;
-    }
-  }else{
-    throw 'Can\'t create player';
-  }
-
-  return {name, token, numbers};
-}
-
 const Tile = (tileValue, tileToken, htmlTile) =>{
   return {tileValue, tileToken, htmlTile};
 }
-
-
-//Game Manager
-const GameManager = (()=>{
-  let turnCount = 0;
-  const turnNumber = 3;
-  let players = [];
-
-
-  players[0] = Player("Player 1", PlayerToken.even);
-  players[1] = Player("Player 2", PlayerToken.odd);
-
-  let playerInTurn = players[0];
-
-  const ManageGameTurn = () => {
-
-    if(playerInTurn==players[0])
-    {
-      playerInTurn=players[1];
-    }else if(playerInTurn==players[1])
-    {
-      playerInTurn=players[0];
-    }else{
-      throw "invalid value for player turn";
-    }
-
-    ++turnCount;
-
-    if(turnCount==turnNumber)
-    {
-      //EndGame;
-    }
-  }
-  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn, ManageGameTurn};
-
-})();
 
 const GameBoard = (()=>{
 
@@ -87,8 +13,7 @@ const GameBoard = (()=>{
   boardDiv.className = "boardDiv";
   documentBody.appendChild(boardDiv);
 
-  let onClickPlayerValues = Player("init", PlayerToken.odd);
-  let onClickNumber;
+
   //Tiles
   for(let row = 0; row < gameBoardSize; ++row)
   {
@@ -108,6 +33,7 @@ const GameBoard = (()=>{
         board[row][col].tileValue = onClickNumber;
         board[row][col].tileToken = GameManager.playerInTurn.token;
         GameManager.ManageGameTurn();
+        alert(GameManager.playerInTurn.name);
         turnDisplayHTML.textContent = GameManager.playerInTurn.name;
       });
       boardRow.appendChild(board[row][col].htmlTile);
@@ -118,13 +44,15 @@ const GameBoard = (()=>{
   //Turn Display
   let turnDisplayHTML = document.createElement('p');
   turnDisplayHTML.className = "turnDisplay";
-  turnDisplayHTML.textContent = "No one's turn";
+  turnDisplayHTML.textContent = GameManager.playerInTurn.name;
   documentBody.appendChild(turnDisplayHTML);
 
   //Players
   let playersAreaHTML = document.createElement('div');
   playersAreaHTML.className = "playersArea";
   documentBody.appendChild(playersAreaHTML);
+
+  let onClickNumber;
 
   GameManager.players.forEach(player  => {
     let playerHTML = document.createElement('div');
@@ -142,33 +70,26 @@ const GameBoard = (()=>{
     }else{
       playerTokenHTML.textContent = "Odd";
     }
-
     playerHTML.appendChild(playerTokenHTML);
 
     let playerNumbersArrayHTML = document.createElement('div');
     playerNumbersArrayHTML.className = "playerNumbers";
     playerHTML.appendChild(playerNumbersArrayHTML);
 
+
     for(let i = 0; i<player.numbers.length; ++i)
     {
       let playerNumberHTML = document.createElement('p');
       playerNumberHTML.textContent = player.numbers[i];
       playerNumberHTML.addEventListener("click", () =>{
-        onClickPlayerValues.name = player.name;
-        GameManager.playerInTurn = player;
+        /*if(player!=GameManager.playerInTurn)
+        {
+          alert('Not your turn yet');
+          return;
+        }*/
         onClickNumber = player.numbers[i];
       });
       playerNumbersArrayHTML.appendChild(playerNumberHTML);
     }
-
   });
-
-
-
-
-
-
-
-
-
 })();
