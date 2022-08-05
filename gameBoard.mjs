@@ -4,6 +4,31 @@ const Tile = (tileValue, tileToken, htmlTile) =>{
   return {tileValue, tileToken, htmlTile};
 }
 
+
+//Game Manager
+const GameManager = (()=>{
+  let players = [];
+  players[0] = Player("Player 1", PlayerToken.even);
+  players[1] = Player("Player 2", PlayerToken.odd);
+
+  let playerInTurn = players[0];
+
+  const ManageGameTurn = () => {
+
+    if(GameManager.playerInTurn==players[0])
+    {
+      GameManager.playerInTurn=players[1];
+    }else if(GameManager.playerInTurn==players[1])
+    {
+      GameManager.playerInTurn=players[0];
+    }else{
+      throw "invalid value for player turn";
+    }
+  }
+  return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn, ManageGameTurn};
+
+})();
+
 const GameBoard = (()=>{
 
   const gameBoardSize = 3;
