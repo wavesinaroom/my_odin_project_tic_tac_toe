@@ -45,11 +45,7 @@ const Tile = (tileValue, tileToken, htmlTile) =>{
 
 //Game Manager
 const GameManager = (()=>{
-  let turnCount = 0;
-  const turnNumber = 3;
   let players = [];
-
-
   players[0] = Player("Player 1", PlayerToken.even);
   players[1] = Player("Player 2", PlayerToken.odd);
 
@@ -57,21 +53,14 @@ const GameManager = (()=>{
 
   const ManageGameTurn = () => {
 
-    if(playerInTurn==players[0])
+    if(GameManager.playerInTurn==players[0])
     {
-      playerInTurn=players[1];
-    }else if(playerInTurn==players[1])
+      GameManager.playerInTurn=players[1];
+    }else if(GameManager.playerInTurn==players[1])
     {
-      playerInTurn=players[0];
+      GameManager.playerInTurn=players[0];
     }else{
       throw "invalid value for player turn";
-    }
-
-    ++turnCount;
-
-    if(turnCount==turnNumber)
-    {
-      //EndGame;
     }
   }
   return /*StartGame, ResetGame, SetUpGameMode, SetUpPlayers,*/ {players,playerInTurn, ManageGameTurn};
