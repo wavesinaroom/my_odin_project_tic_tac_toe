@@ -93,11 +93,14 @@ const GameBoard = (()=>{
         if(board[row][col].tileToken!=undefined)
           throw 'Tile\'s already been taken';
 
-        board[row][col].htmlTile.textContent = onClickNumber;
-        board[row][col].tileValue = onClickNumber;
-        board[row][col].tileToken = GameManager.playerInTurn.token;
-        GameManager.ManageGameTurn();
-        turnDisplayHTML.textContent = GameManager.playerInTurn.name;
+        if(onClickNumber!=undefined)
+        {
+          board[row][col].htmlTile.textContent = onClickNumber;
+          board[row][col].tileValue = onClickNumber;
+          board[row][col].tileToken = GameManager.playerInTurn.token;
+          GameManager.ManageGameTurn();
+          turnDisplayHTML.textContent = GameManager.playerInTurn.name;
+        }
       });
       boardRow.appendChild(board[row][col].htmlTile);
     }
@@ -107,7 +110,7 @@ const GameBoard = (()=>{
   //Turn Display
   let turnDisplayHTML = document.createElement('p');
   turnDisplayHTML.className = "turnDisplay";
-  turnDisplayHTML.textContent = "No one's turn";
+  turnDisplayHTML.textContent = GameManager.playerInTurn.name;
   documentBody.appendChild(turnDisplayHTML);
 
   //Players
@@ -131,7 +134,6 @@ const GameBoard = (()=>{
     }else{
       playerTokenHTML.textContent = "Odd";
     }
-
     playerHTML.appendChild(playerTokenHTML);
 
     let playerNumbersArrayHTML = document.createElement('div');
@@ -143,8 +145,12 @@ const GameBoard = (()=>{
       let playerNumberHTML = document.createElement('p');
       playerNumberHTML.textContent = player.numbers[i];
       playerNumberHTML.addEventListener("click", () =>{
-        onClickPlayerValues.name = player.name;
-        GameManager.playerInTurn = player;
+        if(player!=GameManager.playerInTurn)
+        {
+          alert('Not your turn yet');
+          onClickNumber = undefined;
+          return;
+        }
         onClickNumber = player.numbers[i];
       });
       playerNumbersArrayHTML.appendChild(playerNumberHTML);
