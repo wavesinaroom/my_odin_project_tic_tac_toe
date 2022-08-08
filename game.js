@@ -10,7 +10,7 @@ const GameMode={
   PvCPU: Symbol("PvCPU")
 }
 
-const Player=(name, token)=>{
+const Player=(name, token, winner=false)=>{
 
   let numbers = [];
   let number;
@@ -35,7 +35,7 @@ const Player=(name, token)=>{
     throw 'Can\'t create player';
   }
 
-  return {name, token, numbers};
+  return {name, token, numbers, winner};
 }
 
 const Tile = (tileValue, tileToken, htmlTile) =>{
@@ -46,13 +46,134 @@ const Tile = (tileValue, tileToken, htmlTile) =>{
 //Game Manager
 const GameManager = (()=>{
   let players = [];
-  players[0] = Player("Player 1", PlayerToken.even);
-  players[1] = Player("Player 2", PlayerToken.odd);
+  players[0] = Player("Player 1", PlayerToken.even, false);
+  players[1] = Player("Player 2", PlayerToken.odd, false);
 
   let playerInTurn = players[0];
 
-  const ManageGameTurn = () => {
+  const ManageGameTurn = (board) => {
+    //Check if tile rows, columns and diagonals sum up to 15 to announce winner
+    //At least 2 tiles must be owned by one of the players
+    //Three adjacent tiles must sum up to 15
 
+    let sum = 0;
+    let tileCount = 0;
+    //Rows
+    for(let row = 0; row < board.length; ++row)
+    {
+      for(let column = 0; column < board.length; ++column)
+      {
+        sum+=board[row][column].tileValue;
+        if(board[row][column].tileToken == GameManager.playerInTurn.token)
+          ++tileCount;
+      }
+      if(tileCount>1&&sum===15)
+      {
+        if(GameManager.playerInTurn.name == players[0].name)
+        {
+          //winner function players[0]
+          alert('P1 Winner');
+          return;
+        }
+        else
+        {
+          //winner function players[1]
+          alert('P2 Winner');
+          return;
+        }
+      }
+      sum=0;
+      tileCount=0;
+    }
+
+    /*
+    ////////////////////
+    sum = 0;
+    tileCount = 0;
+    for(let column = 0; column < board.length; ++column)
+    {
+      for(let row = 0; row < board.length; ++row)
+      {
+        sum+=board[row][column].tileValue;
+        if(board[row][column].tileToken == GameManager.playerInTurn.token)
+          ++tileCount;
+      }
+      if(tileCount>1&&sum===15)
+      {
+          if(playerInTurn.name == players[0].name)
+          {
+            //winner function players[0]
+            alert('P1 Winner');
+            return;
+          }
+          else
+          {
+            //winner function players[1]
+            alert('P2 Winner');
+            return;
+          }
+      }
+      sum = 0;
+      tileCount = 0;
+    }
+    console.log(sum);
+    console.log(tileCount);
+    ////////////////////
+
+    for(let diagonal = 0; diagonal<board.length; ++diagonal)
+    {
+      sum+=board[diagonal][diagonal].tileValue;
+      if(board[diagonal][diagonal].tileToken == GameManager.playerInTurn.token)
+        ++tileCount;
+    }
+
+    if(tileCount>1&&sum===15)
+    {
+        if(playerInTurn.name == players[0].name)
+        {
+          //winner function players[0]
+          alert('P1 Winner');
+          return;
+        }
+        else
+        {
+          //winner function players[1]
+          alert('P2 Winner');
+          return;
+        }
+    }
+    console.log(sum);
+    console.log(tileCount);
+    ///////////////////////////
+    sum = 0;
+    tileCount = 0;
+
+    for(let diagonal = 0; diagonal<board.length; ++diagonal)
+    {
+      sum+=board[diagonal][(board.length-1)-diagonal].tileValue;
+      if(board[diagonal][(board.length-1)-diagonal].tileToken == GameManager.playerInTurn.token)
+        ++tileCount;
+    }
+
+    if(tileCount>1&&sum===15)
+    {
+        if(playerInTurn.name == players[0].name)
+        {
+          //winner function players[0]
+          alert('P1 Winner');
+          return;
+        }
+        else
+        {
+          //winner function players[1]
+          alert('P2 Winner');
+          return;
+        }
+    }
+    console.log(sum);
+    console.log(tileCount);
+    alert('Noone wins');
+    */
     if(GameManager.playerInTurn==players[0])
     {
       GameManager.playerInTurn=players[1];
@@ -76,7 +197,6 @@ const GameBoard = (()=>{
   boardDiv.className = "boardDiv";
   documentBody.appendChild(boardDiv);
 
-  let onClickPlayerValues = Player("init", PlayerToken.odd);
   let onClickNumber;
   //Tiles
   for(let row = 0; row < gameBoardSize; ++row)
@@ -85,7 +205,7 @@ const GameBoard = (()=>{
     boardRow.className = "boardRow";
     for(let col = 0; col < gameBoardSize; ++col)
     {
-      board[row][col] = Tile(1, PlayerToken.none, document.createElement('td'));
+      board[row][col] = Tile(0, PlayerToken.none, document.createElement('td'));
       board[row][col].htmlTile.className = "boardTile";
       board[row][col].htmlTile.textContent = "Yo";
       board[row][col].htmlTile.addEventListener('click', ()=>{
@@ -98,7 +218,7 @@ const GameBoard = (()=>{
           board[row][col].htmlTile.textContent = onClickNumber;
           board[row][col].tileValue = onClickNumber;
           board[row][col].tileToken = GameManager.playerInTurn.token;
-          GameManager.ManageGameTurn();
+          GameManager.ManageGameTurn(board);
           turnDisplayHTML.textContent = GameManager.playerInTurn.name;
         }
       });
@@ -145,6 +265,7 @@ const GameBoard = (()=>{
       let playerNumberHTML = document.createElement('p');
       playerNumberHTML.textContent = player.numbers[i];
       playerNumberHTML.addEventListener("click", () =>{
+        //// TODO: Disable number after being used
         if(player!=GameManager.playerInTurn)
         {
           alert('Not your turn yet');
@@ -157,13 +278,4 @@ const GameBoard = (()=>{
     }
 
   });
-
-
-
-
-
-
-
-
-
 })();
