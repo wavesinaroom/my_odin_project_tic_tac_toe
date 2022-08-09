@@ -198,6 +198,7 @@ const GameBoard = (()=>{
   documentBody.appendChild(boardDiv);
 
   let onClickNumber;
+  let numbersOnBoard=[];
   //Tiles
   for(let row = 0; row < gameBoardSize; ++row)
   {
@@ -213,6 +214,15 @@ const GameBoard = (()=>{
         if(board[row][col].tileToken!=undefined)
           throw 'Tile\'s already been taken';
 
+        for(let numberPos = 0; numberPos<numbersOnBoard.length; ++numberPos)
+        {
+          if(onClickNumber==numbersOnBoard[numberPos])
+          {
+            alert("Number\'s already on the board");
+            return;
+          }
+        }
+
         if(onClickNumber!=undefined)
         {
           board[row][col].htmlTile.textContent = onClickNumber;
@@ -220,6 +230,7 @@ const GameBoard = (()=>{
           board[row][col].tileToken = GameManager.playerInTurn.token;
           GameManager.ManageGameTurn(board);
           turnDisplayHTML.textContent = GameManager.playerInTurn.name;
+          numbersOnBoard.push(onClickNumber);
         }
       });
       boardRow.appendChild(board[row][col].htmlTile);
@@ -265,7 +276,6 @@ const GameBoard = (()=>{
       let playerNumberHTML = document.createElement('p');
       playerNumberHTML.textContent = player.numbers[i];
       playerNumberHTML.addEventListener("click", () =>{
-        //// TODO: Disable number after being used
         if(player!=GameManager.playerInTurn)
         {
           alert('Not your turn yet');
