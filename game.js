@@ -52,13 +52,10 @@ const GameManager = (()=>{
   let playerInTurn = players[0];
 
   const ManageGameTurn = (board) => {
-    //Check if tile rows, columns and diagonals sum up to 15 to announce winner
-    //At least 2 tiles must be owned by one of the players
-    //Three adjacent tiles must sum up to 15
 
     let sum = 0;
     let tileCount = 0;
-    //Rows
+
     for(let row = 0; row < board.length; ++row)
     {
       for(let column = 0; column < board.length; ++column)
@@ -69,7 +66,7 @@ const GameManager = (()=>{
       }
       if(tileCount>1&&sum===15)
       {
-        if(GameManager.playerInTurn.name == players[0].name)
+        if(GameManager.playerInTurn.name == GameManager.players[0].name)
         {
           //winner function players[0]
           alert('P1 Winner');
@@ -86,10 +83,6 @@ const GameManager = (()=>{
       tileCount=0;
     }
 
-    /*
-    ////////////////////
-    sum = 0;
-    tileCount = 0;
     for(let column = 0; column < board.length; ++column)
     {
       for(let row = 0; row < board.length; ++row)
@@ -100,7 +93,7 @@ const GameManager = (()=>{
       }
       if(tileCount>1&&sum===15)
       {
-          if(playerInTurn.name == players[0].name)
+          if(GameManager.playerInTurn.name == GameManager.players[0].name)
           {
             //winner function players[0]
             alert('P1 Winner');
@@ -116,9 +109,6 @@ const GameManager = (()=>{
       sum = 0;
       tileCount = 0;
     }
-    console.log(sum);
-    console.log(tileCount);
-    ////////////////////
 
     for(let diagonal = 0; diagonal<board.length; ++diagonal)
     {
@@ -129,7 +119,7 @@ const GameManager = (()=>{
 
     if(tileCount>1&&sum===15)
     {
-        if(playerInTurn.name == players[0].name)
+        if(GameManager.playerInTurn.name == GameManager.players[0].name)
         {
           //winner function players[0]
           alert('P1 Winner');
@@ -142,11 +132,6 @@ const GameManager = (()=>{
           return;
         }
     }
-    console.log(sum);
-    console.log(tileCount);
-    ///////////////////////////
-    sum = 0;
-    tileCount = 0;
 
     for(let diagonal = 0; diagonal<board.length; ++diagonal)
     {
@@ -157,7 +142,7 @@ const GameManager = (()=>{
 
     if(tileCount>1&&sum===15)
     {
-        if(playerInTurn.name == players[0].name)
+        if(GameManager.playerInTurn.name == GameManager.players[0].name)
         {
           //winner function players[0]
           alert('P1 Winner');
@@ -170,10 +155,7 @@ const GameManager = (()=>{
           return;
         }
     }
-    console.log(sum);
-    console.log(tileCount);
-    alert('Noone wins');
-    */
+
     if(GameManager.playerInTurn==players[0])
     {
       GameManager.playerInTurn=players[1];
