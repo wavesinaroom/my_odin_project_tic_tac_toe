@@ -1,0 +1,17 @@
+:root{
+  --waves-orange: #ff9700;
+  --waves-black: #27272A;
+}
+
+body
+{
+  background-color: var(--waves-orange);
+}
+
+.boardDiv {
+  display: grid;
+}
+
+.boardDiv .boardRow .boardTile{
+  font-size: 120px;
+}
