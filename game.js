@@ -136,7 +136,6 @@ const GameManager = (()=>{
     sum = 0;
     tileCount = 0;
 
-    // TODO: fix diagonal check bug
     for(let diagonal = 0; diagonal<board.length; ++diagonal)
     {
       sum+=board[diagonal][(board.length-1)-diagonal].tileValue;
@@ -161,6 +160,25 @@ const GameManager = (()=>{
     }
 
     // TODO: Write code for tie game
+    tileCount=0;
+
+    for(row=0; row<board.length; ++row)
+    {
+      for(column=0; column<board.length; ++column)
+      {
+        if(board[row][column].tileValue>=1&&board[row][column].tileValue<=10)
+        {
+          ++tileCount;
+        }
+      }
+    }
+
+    if(tileCount==Math.pow(board.length, 2))
+    {
+      alert('tie');
+      return;
+    }
+
     if(GameManager.playerInTurn==players[0])
     {
       GameManager.playerInTurn=players[1];
