@@ -67,18 +67,8 @@ const GameManager = (()=>{
       }
       if(tileCount>1&&sum===15)
       {
-        if(GameManager.playerInTurn.name == GameManager.players[0].name)
-        {
-          GameBoard.HideBoard();
-          alert('P1 Winner');
+          GameBoard.DeleteBoard();
           return;
-        }
-        else
-        {
-          GameBoard.HideBoard();
-          alert('P2 Winner');
-          return;
-        }
       }
       sum=0;
       tileCount=0;
@@ -94,18 +84,8 @@ const GameManager = (()=>{
       }
       if(tileCount>1&&sum===15)
       {
-          if(GameManager.playerInTurn.name == GameManager.players[0].name)
-          {
-            GameBoard.HideBoard();
-            alert('P1 Winner');
-            return;
-          }
-          else
-          {
-            GameBoard.HideBoard();
-            alert('P2 Winner');
-            return;
-          }
+          GameBoard.DeleteBoard();
+          return;
       }
       sum = 0;
       tileCount = 0;
@@ -120,16 +100,8 @@ const GameManager = (()=>{
 
     if(tileCount>1&&sum===15)
     {
-        if(GameManager.playerInTurn.name == GameManager.players[0].name)
-        {
-          GameBoard.HideBoard();
-          return;
-        }
-        else
-        {
-          GameBoard.HideBoard();
-          return;
-        }
+        GameBoard.DeleteBoard();
+        return;
     }
 
     sum = 0;
@@ -144,16 +116,8 @@ const GameManager = (()=>{
 
     if(tileCount>1&&sum===15)
     {
-        if(GameManager.playerInTurn.name == GameManager.players[0].name)
-        {
-          GameBoard.HideBoard();
-          return;
-        }
-        else
-        {
-          GameBoard.HideBoard();
-          return;
-        }
+        GameBoard.DeleteBoard();
+        return;
     }
 
     tileCount=0;
@@ -171,7 +135,7 @@ const GameManager = (()=>{
 
     if(tileCount==Math.pow(board.length, 2))
     {
-      GameBoard.HideBoard();
+      GameBoard.DeleteBoard();
       return;
     }
 
@@ -293,11 +257,12 @@ const GameBoard = (()=>{
     });
   }
 
-  const HideBoard = () =>{
+  const DeleteBoard = () =>{
     documentBody.removeChild(boardDiv);
     documentBody.removeChild(playersAreaDiv);
+    alert(GameManager.playerInTurn.name);
   }
-  return {SetUpBoard, HideBoard};
+  return {SetUpBoard, DeleteBoard};
 })();
 
 GameBoard.SetUpBoard();
