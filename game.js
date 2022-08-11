@@ -10,7 +10,7 @@ const GameMode={
   PvCPU: Symbol("PvCPU")
 }
 
-const Player=(name, token, winner=false)=>{
+const Player=(name, token)=>{
 
   let numbers = [];
   let number;
@@ -35,7 +35,7 @@ const Player=(name, token, winner=false)=>{
     throw 'Can\'t create player';
   }
 
-  return {name, token, numbers, winner};
+  return {name, token, numbers};
 }
 
 const Tile = (tileValue, tileToken, htmlTile) =>{
@@ -49,10 +49,14 @@ const GameManager = (()=>{
   let gameMode = GameMode.PvP;
 
   let players = [];
-  players[0] = Player("Player 1", PlayerToken.even, false);
-  players[1] = Player("Player 2", PlayerToken.odd, false);
+  players[0] = Player("Player 1", PlayerToken.even);
+  players[1] = Player("Player 2", PlayerToken.odd);
 
   let playerInTurn = players[0];
+
+  const CreatePlayers = (playerNumber, playerName) => {
+    players[playerNumber].name = playerName;
+  }
 
 
   const ManageGameTurn = (board) => {
@@ -153,7 +157,7 @@ const GameManager = (()=>{
     }
   }
 
-  return /*SetUpGame*/ {players,playerInTurn, ManageGameTurn};
+  return {players,playerInTurn, ManageGameTurn, CreatePlayers};
 
 })();
 
@@ -266,6 +270,7 @@ const GameBoard = (()=>{
   const DeleteBoard = () =>{
     documentBody.removeChild(boardDiv);
     documentBody.removeChild(playersAreaDiv);
+    //Winner
     alert(GameManager.playerInTurn.name);
   }
   return {SetUpBoard, DeleteBoard};
@@ -295,6 +300,7 @@ const MainPanel = (() => {
       pvpHTMLButton.textContent = "Player vs Player";
       pvpHTMLButton.addEventListener('click',()=>{
         ShowSetUpPanel(GameMode.PvP);
+        GameManager.gameMode = GameMode.PvP;
       });
       welcomePanelDiv.appendChild(pvpHTMLButton);
 
@@ -302,7 +308,8 @@ const MainPanel = (() => {
       pvcpuHTMLButton.id = "pvcpuHTMLButton";
       pvcpuHTMLButton.textContent = "Player vs CPU";
       pvcpuHTMLButton.addEventListener('click',()=>{
-          ShowSetUpPanel(GameMode.PvCPU);
+        ShowSetUpPanel(GameMode.PvCPU);
+        GameManager.gameMode = GameMode.PvCPU;
       });
       welcomePanelDiv.appendChild(pvcpuHTMLButton);
     }
@@ -313,6 +320,9 @@ const MainPanel = (() => {
       let setUpPanelDiv = document.createElement('div');
       setUpPanelDiv.className = "setUpPanelDiv";
       documentBody.appendChild(setUpPanelDiv);
+
+      let playerOneNameInput;
+      let playerTwoNameInput;
 
       if(gameMode == GameMode.PvP)
       {
@@ -325,23 +335,25 @@ const MainPanel = (() => {
         playerOneNameInputLabel.innerHTML =  "Player one name: ";
         playerOneDiv.appendChild(playerOneNameInputLabel);
 
-        let playerOneNameInput = document.createElement('input');
+        playerOneNameInput = document.createElement('input');
         playerOneNameInput.type = 'text';
         playerOneDiv.appendChild(playerOneNameInput);
 
         let playerTwoDiv =  document.createElement('div');
-        playerTwoDiv.className = "playerOne";
+        playerTwoDiv.className = "playerTwo";
         documentBody.appendChild(playerTwoDiv);
 
         let playerTwoNameInputLabel = document.createElement('p');
         playerTwoNameInputLabel.innerHTML =  "Player two name: ";
         playerTwoDiv.appendChild(playerTwoNameInputLabel);
 
-        let playerTwoNameInput = document.createElement('input');
+        playerTwoNameInput = document.createElement('input');
         playerTwoNameInput.type = 'text';
         playerTwoNameInput.label = 'Player Two Name:';
         playerTwoDiv.appendChild(playerTwoNameInput);
 
+        setUpPanelDiv.appendChild(playerOneDiv);
+        setUpPanelDiv.appendChild(playerTwoDiv);
 
       }else{
         let playerOneDiv =  document.createElement('div');
@@ -357,6 +369,15 @@ const MainPanel = (() => {
         playerOneDiv.appendChild(playerOneNameInput);
       }
 
+      let createGameButton = document.createElement('button');
+      createGameButton.textContent = "Start Game";
+      createGameButton.addEventListener('click', () => {
+        GameManager.CreatePlayers(0,playerOneNameInput.value);
+        GameManager.CreatePlayers(1,playerTwoNameInput.value);
+        documentBody.removeChild(setUpPanelDiv);
+        GameBoard.SetUpBoard();
+      });
+      setUpPanelDiv.appendChild(createGameButton);
     }
 
     //Game Mode    //Players' name input
