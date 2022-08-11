@@ -273,9 +273,10 @@ const GameBoard = (()=>{
 
 const MainPanel = (() => {
     //Welcome Message
+    let welcomePanelDiv;
 
     const ShowWelcomePanel = () =>{
-      let welcomePanelDiv = document.createElement('div');
+      welcomePanelDiv = document.createElement('div');
       welcomePanelDiv.className = "welcomePanel";
       documentBody.appendChild(welcomePanelDiv);
 
@@ -292,31 +293,75 @@ const MainPanel = (() => {
       let pvpHTMLButton = document.createElement('button');
       pvpHTMLButton.id = "pvpHTMLButton";
       pvpHTMLButton.textContent = "Player vs Player";
+      pvpHTMLButton.addEventListener('click',()=>{
+        ShowSetUpPanel(GameMode.PvP);
+      });
       welcomePanelDiv.appendChild(pvpHTMLButton);
 
       let pvcpuHTMLButton = document.createElement('button');
       pvcpuHTMLButton.id = "pvcpuHTMLButton";
       pvcpuHTMLButton.textContent = "Player vs CPU";
+      pvcpuHTMLButton.addEventListener('click',()=>{
+          ShowSetUpPanel(GameMode.PvCPU);
+      });
       welcomePanelDiv.appendChild(pvcpuHTMLButton);
     }
 
-    const ShowSetUpPanel = ()=>{
+    const ShowSetUpPanel = (gameMode)=>{
+      documentBody.removeChild(welcomePanelDiv);
+
       let setUpPanelDiv = document.createElement('div');
       setUpPanelDiv.className = "setUpPanelDiv";
       documentBody.appendChild(setUpPanelDiv);
 
-      if(GameManager.gameMode == GameMode.PvP)
+      if(gameMode == GameMode.PvP)
       {
-        //TODO: Create two input fields for Players' name
-        //TODO: Create token selection buttons
+
+        let playerOneDiv =  document.createElement('div');
+        playerOneDiv.className = "playerOne";
+        documentBody.appendChild(playerOneDiv);
+
+        let playerOneNameInputLabel = document.createElement('p');
+        playerOneNameInputLabel.innerHTML =  "Player one name: ";
+        playerOneDiv.appendChild(playerOneNameInputLabel);
+
+        let playerOneNameInput = document.createElement('input');
+        playerOneNameInput.type = 'text';
+        playerOneDiv.appendChild(playerOneNameInput);
+
+        let playerTwoDiv =  document.createElement('div');
+        playerTwoDiv.className = "playerOne";
+        documentBody.appendChild(playerTwoDiv);
+
+        let playerTwoNameInputLabel = document.createElement('p');
+        playerTwoNameInputLabel.innerHTML =  "Player two name: ";
+        playerTwoDiv.appendChild(playerTwoNameInputLabel);
+
+        let playerTwoNameInput = document.createElement('input');
+        playerTwoNameInput.type = 'text';
+        playerTwoNameInput.label = 'Player Two Name:';
+        playerTwoDiv.appendChild(playerTwoNameInput);
+
+
       }else{
-        //TODO: Create one input for a single player's name
-        //TODO: Create token selection butoo
+        let playerOneDiv =  document.createElement('div');
+        playerOneDiv.className = "playerOne";
+        documentBody.appendChild(playerOneDiv);
+
+        let playerOneNameInputLabel = document.createElement('p');
+        playerOneNameInputLabel.innerHTML =  "Player's name: ";
+        playerOneDiv.appendChild(playerOneNameInputLabel);
+
+        let playerOneNameInput = document.createElement('input');
+        playerOneNameInput.type = 'text';
+        playerOneDiv.appendChild(playerOneNameInput);
       }
 
     }
 
     //Game Mode    //Players' name input
     //Start Game button
-    return {ShowWelcomePanel,ShowSetUpPanel};
+    return {ShowWelcomePanel, ShowSetUpPanel};
 })();
+
+MainPanel.ShowWelcomePanel();
