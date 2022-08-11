@@ -45,6 +45,9 @@ const Tile = (tileValue, tileToken, htmlTile) =>{
 
 //Game Manager
 const GameManager = (()=>{
+
+  let gameMode = GameMode.PvP;
+
   let players = [];
   players[0] = Player("Player 1", PlayerToken.even, false);
   players[1] = Player("Player 2", PlayerToken.odd, false);
@@ -156,15 +159,18 @@ const GameManager = (()=>{
 
 const GameBoard = (()=>{
 
-  let boardDiv = document.createElement('div');
-  boardDiv.className = "boardDiv";
-  documentBody.appendChild(boardDiv);
-
-  let playersAreaDiv = document.createElement('div');
-  playersAreaDiv.className = "playersArea";
-  documentBody.appendChild(playersAreaDiv);
+  let boardDiv, playersAreaDiv;
 
   const SetUpBoard = () =>{
+    boardDiv = document.createElement('div');
+    boardDiv.className = "boardDiv";
+    documentBody.appendChild(boardDiv);
+
+    playersAreaDiv = document.createElement('div');
+    playersAreaDiv.className = "playersArea";
+    documentBody.appendChild(playersAreaDiv);
+
+
     const gameBoardSize = 3;
     let board = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
 
@@ -265,4 +271,52 @@ const GameBoard = (()=>{
   return {SetUpBoard, DeleteBoard};
 })();
 
-GameBoard.SetUpBoard();
+const MainPanel = (() => {
+    //Welcome Message
+
+    const ShowWelcomePanel = () =>{
+      let welcomePanelDiv = document.createElement('div');
+      welcomePanelDiv.className = "welcomePanel";
+      documentBody.appendChild(welcomePanelDiv);
+
+      let welcomeTitleHTML = document.createElement('h1');
+      welcomeTitleHTML.id = "welcomeTitleHTML";
+      welcomeTitleHTML.textContent = "Hey! Ready to play tic-tac-toe?";
+      welcomePanelDiv.appendChild(welcomeTitleHTML);
+
+      let welcomeMessageHTML = document.createElement('p');
+      welcomeMessageHTML.id = "welcomeMessageHTML";
+      welcomeMessageHTML.textContent = "Choose your game mode";
+      welcomePanelDiv.appendChild(welcomeMessageHTML);
+
+      let pvpHTMLButton = document.createElement('button');
+      pvpHTMLButton.id = "pvpHTMLButton";
+      pvpHTMLButton.textContent = "Player vs Player";
+      welcomePanelDiv.appendChild(pvpHTMLButton);
+
+      let pvcpuHTMLButton = document.createElement('button');
+      pvcpuHTMLButton.id = "pvcpuHTMLButton";
+      pvcpuHTMLButton.textContent = "Player vs CPU";
+      welcomePanelDiv.appendChild(pvcpuHTMLButton);
+    }
+
+    const ShowSetUpPanel = ()=>{
+      let setUpPanelDiv = document.createElement('div');
+      setUpPanelDiv.className = "setUpPanelDiv";
+      documentBody.appendChild(setUpPanelDiv);
+
+      if(GameManager.gameMode == GameMode.PvP)
+      {
+        //TODO: Create two input fields for Players' name
+        //TODO: Create token selection buttons
+      }else{
+        //TODO: Create one input for a single player's name
+        //TODO: Create token selection butoo
+      }
+
+    }
+
+    //Game Mode    //Players' name input
+    //Start Game button
+    return {ShowWelcomePanel,ShowSetUpPanel};
+})();
