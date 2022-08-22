@@ -15,6 +15,10 @@ const Move={
   col: 0
 }
 
+const Tile = (tileValue, tileToken, htmlTile) =>{
+  return {tileValue, tileToken, htmlTile};
+}
+
 const Player=(name, token)=>{
 
   let numbers = [];
@@ -43,26 +47,7 @@ const Player=(name, token)=>{
   return {name, token, numbers};
 }
 
-const Tile = (tileValue, tileToken, htmlTile) =>{
-  return {tileValue, tileToken, htmlTile};
-}
-
-
-//Game Manager
-const GameManager = (()=>{
-
-  let players = [];
-  players[0] = Player("Player 1", PlayerToken.even);
-  players[1] = Player("Player 2", PlayerToken.odd);
-
-  let playerInTurn = players[0];
-
-  let row, column;
-
-  const CreatePlayers = (playerNumber, playerName) => {
-    players[playerNumber].name = playerName;
-  }
-
+const CPU = (()=>{
   const IsMoveLeft = (board) => {
     for(row = 0; row < board.length; ++row)
       for(column = 0; column < board.length; ++column)
@@ -253,6 +238,24 @@ const GameManager = (()=>{
       }
     }
     return bestMove;
+  }
+})();
+
+
+
+//Game Manager
+const GameManager = (()=>{
+
+  let players = [];
+  players[0] = Player("Player 1", PlayerToken.even);
+  players[1] = Player("Player 2", PlayerToken.odd);
+
+  let playerInTurn = players[0];
+
+  let row, column;
+
+  const CreatePlayers = (playerNumber, playerName) => {
+    players[playerNumber].name = playerName;
   }
 
   const ManageGameTurn = (board) => {
