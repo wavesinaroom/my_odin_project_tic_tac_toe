@@ -10,6 +10,11 @@ const GameMode={
   PvCPU: Symbol("PvCPU")
 }
 
+const Move={
+  row:  0,
+  col: 0
+}
+
 const Player=(name, token)=>{
 
   let numbers = [];
@@ -46,16 +51,182 @@ const Tile = (tileValue, tileToken, htmlTile) =>{
 //Game Manager
 const GameManager = (()=>{
 
-  let gameMode = GameMode.PvP;
-
   let players = [];
   players[0] = Player("Player 1", PlayerToken.even);
   players[1] = Player("Player 2", PlayerToken.odd);
 
   let playerInTurn = players[0];
 
+  let row, column;
+
   const CreatePlayers = (playerNumber, playerName) => {
     players[playerNumber].name = playerName;
+  }
+
+  const IsMoveLeft = (board) => {
+    for(row = 0; row < board.length; ++row)
+      for(column = 0; column < board.length; ++column)
+        if (board[row][column]==undefined)
+          return true;
+    return false;
+  }
+
+  const Evaluate = (board) => {
+    for(row = 0; row < board.length; ++row)
+    {
+      for(column = 0; column < board.length; ++column)
+      {
+        sum+=board[row][column].tileValue;
+        if(board[row][column].tileToken == GameManager.playerInTurn.token)
+          ++tileCount;
+      }
+      if(tileCount>1&&sum===15)
+      {
+          if(GameManager.playerInTurn.token == PlayerToken.even)
+            return 1;
+          else
+            return -1;
+      }
+      sum=0;
+      tileCount=0;
+    }
+
+    for(let column = 0; column < board.length; ++column)
+    {
+      for(let row = 0; row < board.length; ++row)
+      {
+        sum+=board[row][column].tileValue;
+        if(board[row][column].tileToken == GameManager.playerInTurn.token)
+          ++tileCount;
+      }
+      if(tileCount>1&&sum===15)
+      {
+        if(GameManager.playerInTurn.token == PlayerToken.even)
+          return 1;
+        else
+          return -1;
+      }
+      sum = 0;
+      tileCount = 0;
+    }
+
+    for(let diagonal = 0; diagonal<board.length; ++diagonal)
+    {
+      sum+=board[diagonal][diagonal].tileValue;
+      if(board[diagonal][diagonal].tileToken == GameManager.playerInTurn.token)
+        ++tileCount;
+    }
+
+    if(tileCount>1&&sum===15)
+    {
+      if(GameManager.playerInTurn.token == PlayerToken.even)
+        return 1;
+      else
+        return -1;
+    }
+
+    sum = 0;
+    tileCount = 0;
+
+    for(let diagonal = 0; diagonal<board.length; ++diagonal)
+    {
+      sum+=board[diagonal][(board.length-1)-diagonal].tileValue;
+      if(board[diagonal][(board.length-1)-diagonal].tileToken == GameManager.playerInTurn.token)
+        ++tileCount;
+    }
+
+    if(tileCount>1&&sum===15)
+    {
+      if(GameManager.playerInTurn.token == PlayerToken.even)
+        return 1;
+      else
+        return -1;
+    }
+
+    tileCount=0;
+
+    for(row=0; row<board.length; ++row)
+    {
+      for(column=0; column<board.length; ++column)
+      {
+        if(board[row][column].tileValue>=1&&board[row][column].tileValue<=10)
+        {
+          ++tileCount;
+        }
+      }
+    }
+
+    if(tileCount==Math.pow(board.length, 2))
+    {
+      if(GameManager.playerInTurn.token == PlayerToken.even)
+        return 1;
+      else
+        return -1;
+    }
+
+    // TODO: Write code for tie game
+    tileCount=0;
+
+    for(row=0; row<board.length; ++row)
+    {
+      for(column=0; column<board.length; ++column)
+      {
+        if(board[row][column].tileValue>=1&&board[row][column].tileValue<=10)
+        {
+          ++tileCount;
+        }
+      }
+    }
+
+    if(tileCount==Math.pow(board.length, 2))
+    {
+      return 0;
+    }
+  }
+
+  const Minimax = (board, depth, isMax) => {
+    let score = Evaluate(board);
+
+    if(score==10)
+      return score;
+
+    if(score==-10)
+      return score;
+
+    if(IsMoveLeft(board == false))
+      return 0;
+
+
+    if(isMax)
+    {
+      let best = -1000;
+      for(row=0; row<board.length; ++row)
+      {
+        for(column=0; column<board.length; ++column){
+          if(board [row][column] == undefined)
+          {
+            //board[row][column] player
+            best = Math.max(best, Minimax(board, depth+1, !isMax));
+            //board[row][column] = undefined
+          }
+        }
+      }
+      return best;
+    }else{
+      let best = 1000;
+      for(row=0; row<board.length; ++row)
+      {
+        for(column=0; column<board.length; ++column){
+          if(board [row][column] == undefined)
+          {
+            //board[row][column] opponent
+            best = Math.min(best, Minimax(board, depth+1, !isMax));
+            //board[row][column] = undefined
+          }
+        }
+      }
+      return best;
+    }
   }
 
 
@@ -64,9 +235,9 @@ const GameManager = (()=>{
     let sum = 0;
     let tileCount = 0;
 
-    for(let row = 0; row < board.length; ++row)
+    for(row = 0; row < board.length; ++row)
     {
-      for(let column = 0; column < board.length; ++column)
+      for(column = 0; column < board.length; ++column)
       {
         sum+=board[row][column].tileValue;
         if(board[row][column].tileToken == GameManager.playerInTurn.token)
@@ -400,8 +571,6 @@ const MainPanel = (() => {
       setUpPanelDiv.appendChild(createGameButton);
     }
 
-    //Game Mode    //Players' name input
-    //Start Game button
     return {ShowWelcomePanel, ShowSetUpPanel};
 })();
 
