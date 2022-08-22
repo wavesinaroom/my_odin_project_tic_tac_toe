@@ -48,6 +48,9 @@ const Player=(name, token)=>{
 }
 
 const CPU = (()=>{
+
+  let row, column;
+
   const IsMoveLeft = (board) => {
     for(row = 0; row < board.length; ++row)
       for(column = 0; column < board.length; ++column)
