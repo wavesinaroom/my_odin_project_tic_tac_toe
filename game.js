@@ -66,7 +66,7 @@ const GameManager = (()=>{
   const IsMoveLeft = (board) => {
     for(row = 0; row < board.length; ++row)
       for(column = 0; column < board.length; ++column)
-        if (board[row][column]==undefined)
+        if (board[row][column].tileToken==undefined)
           return true;
     return false;
   }
@@ -84,7 +84,7 @@ const GameManager = (()=>{
       {
           if(GameManager.playerInTurn.token == PlayerToken.even)
             return 1;
-          else
+          else if(GameManager.playerInTurn.token == PlayerToken.false)
             return -1;
       }
       sum=0;
@@ -103,7 +103,7 @@ const GameManager = (()=>{
       {
         if(GameManager.playerInTurn.token == PlayerToken.even)
           return 1;
-        else
+        else if(GameManager.playerInTurn.token == PlayerToken.false)
           return -1;
       }
       sum = 0;
@@ -121,7 +121,7 @@ const GameManager = (()=>{
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
         return 1;
-      else
+      else if(GameManager.playerInTurn.token == PlayerToken.false)
         return -1;
     }
 
@@ -139,7 +139,7 @@ const GameManager = (()=>{
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
         return 1;
-      else
+      else if(GameManager.playerInTurn.token == PlayerToken.false)
         return -1;
     }
 
@@ -160,7 +160,7 @@ const GameManager = (()=>{
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
         return 1;
-      else
+      else if(GameManager.playerInTurn.token == PlayerToken.false)
         return -1;
     }
 
@@ -205,9 +205,9 @@ const GameManager = (()=>{
         for(column=0; column<board.length; ++column){
           if(board [row][column] == undefined)
           {
-            //board[row][column] player
+            board[row][column].tileToken = PlayerToken.even;
             best = Math.max(best, Minimax(board, depth+1, !isMax));
-            //board[row][column] = undefined
+            board[row][column].tileToken = undefined;
           }
         }
       }
@@ -219,9 +219,9 @@ const GameManager = (()=>{
         for(column=0; column<board.length; ++column){
           if(board [row][column] == undefined)
           {
-            //board[row][column] opponent
+            board[row][column].tileToken = PlayerToken.odd;
             best = Math.min(best, Minimax(board, depth+1, !isMax));
-            //board[row][column] = undefined
+            board[row][column].tileToken = undefined;
           }
         }
       }
