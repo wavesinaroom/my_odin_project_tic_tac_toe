@@ -203,7 +203,7 @@ const GameManager = (()=>{
       for(row=0; row<board.length; ++row)
       {
         for(column=0; column<board.length; ++column){
-          if(board [row][column] == undefined)
+          if(board [row][column].tileToken == undefined)
           {
             board[row][column].tileToken = PlayerToken.even;
             best = Math.max(best, Minimax(board, depth+1, !isMax));
@@ -217,7 +217,7 @@ const GameManager = (()=>{
       for(row=0; row<board.length; ++row)
       {
         for(column=0; column<board.length; ++column){
-          if(board [row][column] == undefined)
+          if(board [row][column].tileToken == undefined)
           {
             board[row][column].tileToken = PlayerToken.odd;
             best = Math.min(best, Minimax(board, depth+1, !isMax));
@@ -229,6 +229,31 @@ const GameManager = (()=>{
     }
   }
 
+  const FindBestMove = (board) =>{
+    let bestVal = -1000;
+    let bestMove = new Move();
+    bestMove.row =  -1;
+    bestMove.column = -1;
+    for(row=0; row<board.length; ++row)
+    {
+      for(column=0; column<board.length; ++column){
+        if(board [row][column].tileToken == undefined)
+        {
+          board[row][column].tileToken = PlayerToken.even;
+          let moveVal = Minimax(board, 0, false);
+          board[row][column].tileToken = undefined;
+
+          if(moveVal>bestVal)
+          {
+            bestMove.row = row;
+            bestMove.column = column;
+            bestVal = moveVal;
+          }
+        }
+      }
+    }
+    return bestMove;
+  }
 
   const ManageGameTurn = (board) => {
 
