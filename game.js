@@ -179,12 +179,9 @@ const CPU = (()=>{
   }
 
   const Minimax = (board, depth, isMax) => {
-    let i,outputNumber;
+    let i,outputNumber = 1;
     let score = Evaluate(board);
     let bestMinimax = new BestMinimax();
-
-    const oddNumbers=[1,3,5,7,9];
-    const evenNumbers=[2,4,6,8,10];
 
     if(score==10)
       return score;
