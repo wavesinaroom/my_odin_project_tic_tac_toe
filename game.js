@@ -12,7 +12,13 @@ const GameMode={
 
 const Move={
   row:  0,
-  col: 0
+  col: 0,
+  number: 0
+}
+
+const BestMinimax={
+  best: 0,
+  cellNumber: 0
 }
 
 const Tile = (tileValue, tileToken, htmlTile) =>{
@@ -71,9 +77,9 @@ const CPU = (()=>{
       if(tileCount>1&&sum===15)
       {
           if(GameManager.playerInTurn.token == PlayerToken.even)
-            return 1;
-          else if(GameManager.playerInTurn.token == PlayerToken.false)
-            return -1;
+            return 10;
+          else if(GameManager.playerInTurn.token == PlayerToken.odd)
+            return -10;
       }
       sum=0;
       tileCount=0;
@@ -90,9 +96,9 @@ const CPU = (()=>{
       if(tileCount>1&&sum===15)
       {
         if(GameManager.playerInTurn.token == PlayerToken.even)
-          return 1;
-        else if(GameManager.playerInTurn.token == PlayerToken.false)
-          return -1;
+          return 10;
+        else if(GameManager.playerInTurn.token == PlayerToken.odd)
+          return -10;
       }
       sum = 0;
       tileCount = 0;
@@ -108,9 +114,9 @@ const CPU = (()=>{
     if(tileCount>1&&sum===15)
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
-        return 1;
-      else if(GameManager.playerInTurn.token == PlayerToken.false)
-        return -1;
+        return 10;
+      else if(GameManager.playerInTurn.token == PlayerToken.odd)
+        return -10;
     }
 
     sum = 0;
@@ -126,9 +132,9 @@ const CPU = (()=>{
     if(tileCount>1&&sum===15)
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
-        return 1;
-      else if(GameManager.playerInTurn.token == PlayerToken.false)
-        return -1;
+        return 10;
+      else if(GameManager.playerInTurn.token == PlayerToken.odd)
+        return -10;
     }
 
     tileCount=0;
@@ -147,9 +153,9 @@ const CPU = (()=>{
     if(tileCount==Math.pow(board.length, 2))
     {
       if(GameManager.playerInTurn.token == PlayerToken.even)
-        return 1;
-      else if(GameManager.playerInTurn.token == PlayerToken.false)
-        return -1;
+        return 10;
+      else if(GameManager.playerInTurn.token == PlayerToken.odd)
+        return -10;
     }
 
     // TODO: Write code for tie game
@@ -173,7 +179,12 @@ const CPU = (()=>{
   }
 
   const Minimax = (board, depth, isMax) => {
+    let i,outputNumber;
     let score = Evaluate(board);
+    let bestMinimax = new BestMinimax();
+
+    const oddNumbers=[1,3,5,7,9];
+    const evenNumbers=[2,4,6,8,10];
 
     if(score==10)
       return score;
@@ -195,10 +206,23 @@ const CPU = (()=>{
           {
             board[row][column].tileToken = PlayerToken.even;
             best = Math.max(best, Minimax(board, depth+1, !isMax));
+            for(i = 0; i<GameBoard.numbersOnBoard.length; ++i){
+              if(GameBoard.numbersOnBoard[i]%2==0)
+              {
+                if(GameBoard.numbersOnBoard[i]>outputNumber)
+                {
+                  outputNumber =  GameBoard.numbersOnBoard[i];
+                }else{
+                  continue;
+                }
+              }
+            }
             board[row][column].tileToken = undefined;
           }
         }
       }
+      bestMinimax.best = best;
+      bestMinimax.number = outputNumber;
       return best;
     }else{
       let best = 1000;
@@ -209,10 +233,23 @@ const CPU = (()=>{
           {
             board[row][column].tileToken = PlayerToken.odd;
             best = Math.min(best, Minimax(board, depth+1, !isMax));
+            for(i = 0; i<GameBoard.numbersOnBoard.length; ++i){
+              if(GameBoard.numbersOnBoard[i]%2==1)
+              {
+                if(GameBoard.numbersOnBoard[i]<outputNumber)
+                {
+                  outputNumber =  GameBoard.numbersOnBoard[i];
+                }else{
+                  continue;
+                }
+              }
+            }
             board[row][column].tileToken = undefined;
           }
         }
       }
+      bestMinimax.best = best;
+      bestMinimax.number =  outputNumber;
       return best;
     }
   }
