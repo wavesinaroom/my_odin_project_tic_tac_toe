@@ -47,6 +47,8 @@ const Player=(name, token)=>{
   return {name, token, numbers};
 }
 
+
+
 //Game Manager
 const GameManager = (()=>{
 
@@ -319,25 +321,15 @@ const MainPanel = (() => {
       welcomePanelDiv.appendChild(welcomeMessageHTML);
 
       let pvpHTMLButton = document.createElement('button');
-      pvpHTMLButton.id = "pvpHTMLButton";
-      pvpHTMLButton.textContent = "Player vs Player";
+      pvpHTMLButton.id = "setUpPlayers";
+      pvpHTMLButton.textContent = "Set up players";
       pvpHTMLButton.addEventListener('click',()=>{
-        ShowSetUpPanel(GameMode.PvP);
-        GameManager.gameMode = GameMode.PvP;
+        ShowSetUpPanel();
       });
       welcomePanelDiv.appendChild(pvpHTMLButton);
-
-      let pvcpuHTMLButton = document.createElement('button');
-      pvcpuHTMLButton.id = "pvcpuHTMLButton";
-      pvcpuHTMLButton.textContent = "Player vs CPU";
-      pvcpuHTMLButton.addEventListener('click',()=>{
-        ShowSetUpPanel(GameMode.PvCPU);
-        GameManager.gameMode = GameMode.PvCPU;
-      });
-      welcomePanelDiv.appendChild(pvcpuHTMLButton);
     }
 
-    const ShowSetUpPanel = (gameMode)=>{
+    const ShowSetUpPanel = ()=>{
       documentBody.removeChild(welcomePanelDiv);
 
       let setUpPanelDiv = document.createElement('div');
@@ -347,50 +339,33 @@ const MainPanel = (() => {
       let playerOneNameInput;
       let playerTwoNameInput;
 
-      if(gameMode == GameMode.PvP)
-      {
+      let playerOneDiv =  document.createElement('div');
+      playerOneDiv.className = "playerOne";
+      documentBody.appendChild(playerOneDiv);
 
-        let playerOneDiv =  document.createElement('div');
-        playerOneDiv.className = "playerOne";
-        documentBody.appendChild(playerOneDiv);
+      let playerOneNameInputLabel = document.createElement('p');
+      playerOneNameInputLabel.innerHTML =  "Player one name: ";
+      playerOneDiv.appendChild(playerOneNameInputLabel);
 
-        let playerOneNameInputLabel = document.createElement('p');
-        playerOneNameInputLabel.innerHTML =  "Player one name: ";
-        playerOneDiv.appendChild(playerOneNameInputLabel);
+      playerOneNameInput = document.createElement('input');
+      playerOneNameInput.type = 'text';
+      playerOneDiv.appendChild(playerOneNameInput);
 
-        playerOneNameInput = document.createElement('input');
-        playerOneNameInput.type = 'text';
-        playerOneDiv.appendChild(playerOneNameInput);
+      let playerTwoDiv =  document.createElement('div');
+      playerTwoDiv.className = "playerTwo";
+      documentBody.appendChild(playerTwoDiv);
 
-        let playerTwoDiv =  document.createElement('div');
-        playerTwoDiv.className = "playerTwo";
-        documentBody.appendChild(playerTwoDiv);
+      let playerTwoNameInputLabel = document.createElement('p');
+      playerTwoNameInputLabel.innerHTML =  "Player two name: ";
+      playerTwoDiv.appendChild(playerTwoNameInputLabel);
 
-        let playerTwoNameInputLabel = document.createElement('p');
-        playerTwoNameInputLabel.innerHTML =  "Player two name: ";
-        playerTwoDiv.appendChild(playerTwoNameInputLabel);
+      playerTwoNameInput = document.createElement('input');
+      playerTwoNameInput.type = 'text';
+      playerTwoNameInput.label = 'Player Two Name:';
+      playerTwoDiv.appendChild(playerTwoNameInput);
 
-        playerTwoNameInput = document.createElement('input');
-        playerTwoNameInput.type = 'text';
-        playerTwoNameInput.label = 'Player Two Name:';
-        playerTwoDiv.appendChild(playerTwoNameInput);
-
-        setUpPanelDiv.appendChild(playerOneDiv);
-        setUpPanelDiv.appendChild(playerTwoDiv);
-
-      }else{
-        let playerOneDiv =  document.createElement('div');
-        playerOneDiv.className = "playerOne";
-        documentBody.appendChild(playerOneDiv);
-
-        let playerOneNameInputLabel = document.createElement('p');
-        playerOneNameInputLabel.innerHTML =  "Player's name: ";
-        playerOneDiv.appendChild(playerOneNameInputLabel);
-
-        let playerOneNameInput = document.createElement('input');
-        playerOneNameInput.type = 'text';
-        playerOneDiv.appendChild(playerOneNameInput);
-      }
+      setUpPanelDiv.appendChild(playerOneDiv);
+      setUpPanelDiv.appendChild(playerTwoDiv);
 
       let createGameButton = document.createElement('button');
       createGameButton.textContent = "Start Game";
