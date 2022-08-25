@@ -1,23 +1,5 @@
-*{
-  color: white;
-
-}
-
-:root{
-  --waves-orange: #ff9700;
-  --waves-black: #27272A;
-}
-
 body
 {
   background-image: url(./images/background_1.jpg);
-
-}
-
-.boardDiv {
-  display: grid;
-}
-
-.boardDiv .boardRow .boardTile{
-  font-size: 120px;
+  color: white;
 }
