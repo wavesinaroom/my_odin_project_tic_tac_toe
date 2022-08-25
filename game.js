@@ -191,14 +191,22 @@ const GameBoard = (()=>{
   let boardDiv, playersAreaDiv;
 
   const SetUpBoard = () =>{
-    boardDiv = document.createElement('div');
+    let boardDiv = document.createElement('div');
     boardDiv.className = "boardDiv";
     documentBody.appendChild(boardDiv);
 
-    playersAreaDiv = document.createElement('div');
+    let instructionsHTML = document.createElement('p');
+    instructionsHTML.className = "boardDiv";
+    instructionsHTML.textContent = "Pick a number from the digits below your name and click on a cell to put your number into. A Row, a column or a diagonal must sum up to 15 to win";
+    boardDiv.appendChild(instructionsHTML);
+
+    let notificationsHTML = document.createElement('p');
+    notificationsHTML.className = "boardDiv";
+    boardDiv.appendChild(notificationsHTML);
+
+    let playersAreaDiv = document.createElement('div');
     playersAreaDiv.className = "playersArea";
     documentBody.appendChild(playersAreaDiv);
-
 
     const gameBoardSize = 3;
     let board = [[gameBoardSize],[gameBoardSize],[gameBoardSize]];
@@ -218,13 +226,13 @@ const GameBoard = (()=>{
         board[row][col].htmlTile.addEventListener('click', ()=>{
 
           if(board[row][col].tileToken!=undefined)
-            throw 'Tile\'s already been taken';
+            notificationsHTML.textContent = 'Tile\'s already been taken';
 
           for(let numberPos = 0; numberPos<numbersOnBoard.length; ++numberPos)
           {
             if(onClickNumber==numbersOnBoard[numberPos])
             {
-              alert("Number\'s already on the board");
+              notificationsHTML.textContent = "Number\'s already on the board";
               return;
             }
           }
@@ -281,9 +289,11 @@ const GameBoard = (()=>{
         playerNumberHTML.addEventListener("click", () =>{
           if(player!=GameManager.playerInTurn)
           {
-            alert('Not your turn yet');
+            notificationsHTML.textContent =  'Not your turn yet';
             onClickNumber = undefined;
             return;
+          }else{
+            notificationsHTML.textContent = " ";
           }
           onClickNumber = player.numbers[i];
         });
@@ -314,11 +324,6 @@ const MainPanel = (() => {
       welcomeTitleHTML.id = "welcomeTitleHTML";
       welcomeTitleHTML.textContent = "Hey! Ready to play tic-tac-toe?";
       welcomePanelDiv.appendChild(welcomeTitleHTML);
-
-      let welcomeMessageHTML = document.createElement('p');
-      welcomeMessageHTML.id = "welcomeMessageHTML";
-      welcomeMessageHTML.textContent = "Choose your game mode";
-      welcomePanelDiv.appendChild(welcomeMessageHTML);
 
       let pvpHTMLButton = document.createElement('button');
       pvpHTMLButton.id = "setUpPlayers";
