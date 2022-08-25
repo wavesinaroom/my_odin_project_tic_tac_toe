@@ -1,3 +1,8 @@
+*{
+  color: white;
+
+}
+
 :root{
   --waves-orange: #ff9700;
   --waves-black: #27272A;
@@ -5,7 +10,8 @@
 
 body
 {
-  background-color: var(--waves-orange);
+  background-image: url(./images/background_1.jpg);
+
 }
 
 .boardDiv {
