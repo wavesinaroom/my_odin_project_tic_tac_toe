@@ -47,8 +47,6 @@ const Player=(name, token)=>{
   return {name, token, numbers};
 }
 
-
-
 //Game Manager
 const GameManager = (()=>{
 
@@ -86,9 +84,9 @@ const GameManager = (()=>{
       tileCount=0;
     }
 
-    for(let column = 0; column < board.length; ++column)
+    for(column = 0; column < board.length; ++column)
     {
-      for(let row = 0; row < board.length; ++row)
+      for(row = 0; row < board.length; ++row)
       {
         sum+=board[row][column].tileValue;
         if(board[row][column].tileToken == GameManager.playerInTurn.token)
