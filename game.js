@@ -191,7 +191,7 @@ const GameBoard = (()=>{
   let boardDiv, playersAreaDiv;
 
   const SetUpBoard = () =>{
-    let boardDiv = document.createElement('div');
+    boardDiv = document.createElement('div');
     boardDiv.className = "boardDiv";
     documentBody.appendChild(boardDiv);
 
@@ -204,7 +204,7 @@ const GameBoard = (()=>{
     notificationsHTML.className = "boardDiv";
     boardDiv.appendChild(notificationsHTML);
 
-    let playersAreaDiv = document.createElement('div');
+    playersAreaDiv = document.createElement('div');
     playersAreaDiv.className = "playersArea";
     documentBody.appendChild(playersAreaDiv);
 
@@ -305,8 +305,24 @@ const GameBoard = (()=>{
   const DeleteBoard = () =>{
     documentBody.removeChild(boardDiv);
     documentBody.removeChild(playersAreaDiv);
-    //Winner
-    alert(GameManager.playerInTurn.name);
+
+    let winnerDiv = document.createElement('div');
+    winnerDiv.className = "winnerDiv";
+    documentBody.appendChild(winnerDiv);
+
+    let winnerDisplay = document.createElement('p');
+    winnerDisplay.className = "winnerDisplay";
+    winnerDisplay.textContent = GameManager.playerInTurn.name + " wins";
+    winnerDiv.appendChild(winnerDisplay);
+
+    let restartButton = document.createElement('button');
+    restartButton.className = "winnerDiv";
+    restartButton.textContent = "Play again";
+    winnerDiv.appendChild(restartButton);
+    restartButton.addEventListener("click", ()=>{
+      documentBody.removeChild(winnerDiv);
+      MainPanel.ShowWelcomePanel();
+    });
   }
   return {SetUpBoard, DeleteBoard};
 })();
