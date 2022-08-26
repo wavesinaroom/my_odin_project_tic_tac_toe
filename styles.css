@@ -1,5 +1,7 @@
 body
 {
   background-image: url(./images/background_1.jpg);
-  color: white;
+  color: #C5FF3D;
+  font-family: 'Advent Pro';
+  font-size: 24px;
 }
