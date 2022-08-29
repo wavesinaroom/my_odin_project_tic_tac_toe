@@ -195,12 +195,12 @@ const GameBoard = (()=>{
     boardDiv.className = "boardDiv";
     documentBody.appendChild(boardDiv);
 
-    let instructionsHTML = document.createElement('p');
+    let instructionsHTML = document.createElement('h3');
     instructionsHTML.className = "boardDiv";
     instructionsHTML.textContent = "Pick a number from the digits below your name and click on a cell to put your number into. A Row, a column or a diagonal must sum up to 15 to win";
     boardDiv.appendChild(instructionsHTML);
 
-    let notificationsHTML = document.createElement('p');
+    let notificationsHTML = document.createElement('h3');
     notificationsHTML.className = "boardDiv";
     boardDiv.appendChild(notificationsHTML);
 
@@ -253,7 +253,7 @@ const GameBoard = (()=>{
     }
 
     //Turn Display
-    let turnDisplayHTML = document.createElement('p');
+    let turnDisplayHTML = document.createElement('h3');
     turnDisplayHTML.className = "turnDisplay";
     turnDisplayHTML.textContent = GameManager.playerInTurn.name;
     documentBody.appendChild(playersAreaDiv);
@@ -269,7 +269,7 @@ const GameBoard = (()=>{
       playerNameHTML.textContent = player.name;
       playerHTML.appendChild(playerNameHTML);
 
-      let playerTokenHTML = document.createElement('p');
+      let playerTokenHTML = document.createElement('h3');
       if(player.token==PlayerToken.even)
       {
         playerTokenHTML.textContent = "Even";
@@ -284,7 +284,7 @@ const GameBoard = (()=>{
 
       for(let i = 0; i<player.numbers.length; ++i)
       {
-        let playerNumberHTML = document.createElement('p');
+        let playerNumberHTML = document.createElement('h3');
         playerNumberHTML.textContent = player.numbers[i];
         playerNumberHTML.addEventListener("click", () =>{
           if(player!=GameManager.playerInTurn)
@@ -364,7 +364,7 @@ const MainPanel = (() => {
       playerOneDiv.className = "playerOne";
       documentBody.appendChild(playerOneDiv);
 
-      let playerOneNameInputLabel = document.createElement('p');
+      let playerOneNameInputLabel = document.createElement('h3');
       playerOneNameInputLabel.innerHTML =  "Player one name: ";
       playerOneDiv.appendChild(playerOneNameInputLabel);
 
@@ -376,7 +376,7 @@ const MainPanel = (() => {
       playerTwoDiv.className = "playerTwo";
       documentBody.appendChild(playerTwoDiv);
 
-      let playerTwoNameInputLabel = document.createElement('p');
+      let playerTwoNameInputLabel = document.createElement('h3');
       playerTwoNameInputLabel.innerHTML =  "Player two name: ";
       playerTwoDiv.appendChild(playerTwoNameInputLabel);
 
