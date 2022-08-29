@@ -20,12 +20,12 @@ button {
   border: none;
   background-color: #E87366;
   font-family: inherit;
-  padding: 0;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color:#fff;
+  font-weight: bolder;
   border-radius: 8px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
   padding: 0.25em , 0.75em;
@@ -40,5 +40,10 @@ button:hover{
   background-color: #BF5F54;
 }
 
+button:focus{
+  outline-style: solid;
+  outline-color: transparent;
+  box-shadow: 0 0 0 2px;
+}
 
 /*026d8d*/
