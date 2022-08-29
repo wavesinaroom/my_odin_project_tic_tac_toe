@@ -13,24 +13,22 @@ body
 }
 
 button {
-
-
-  border: none;
-  background-color: #E81A55;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color:#fff;
-  font-weight: bolder;
+  background-color: #E81A55;
+  border: none;
   border-radius: 8px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
-  padding: 0.25em , 0.75em;
-  min-width: 10ch;
-  min-height: 44px;
-  text-align: center;
+  color:#fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-weight: bolder;
+  justify-content: center;
   line-height: 1.1;
+  min-height: 44px;
+  min-width: 10ch;
+  padding: 0.25em , 0.75em;
+  text-align: center;
   transition: 220ms;
 }
 
@@ -39,9 +37,19 @@ button:hover{
 }
 
 button:focus{
+  box-shadow: 0 0 0 2px;
   outline-style: solid;
   outline-color: transparent;
-  box-shadow: 0 0 0 2px;
+}
+
+button:active{
+  background-color:#9C022D;
+}
+
+.welcomePanelDiv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /*026d8d*/
