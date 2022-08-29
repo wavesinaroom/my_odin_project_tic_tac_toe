@@ -5,7 +5,9 @@
 body
 {
   background-image: url(./images/background_1.jpg);
-  color: #4FE3E8;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color:#85E80C;
   font-family: 'Advent Pro';
   font-size: 24px;
 }
@@ -37,3 +39,6 @@ button {
 button:hover{
   background-color: #BF5F54;
 }
+
+
+/*026d8d*/
