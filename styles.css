@@ -7,18 +7,16 @@ body
   background-image: url(./images/background_1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  color:#85E80C;
+  color:#E8D91A;
   font-family: 'Advent Pro';
   font-size: 24px;
 }
 
 button {
 
-  --btnColor: #E8AE43;
-  --lightness: #E8AA38;
 
   border: none;
-  background-color: #E87366;
+  background-color: #E81A55;
   font-family: inherit;
   cursor: pointer;
   display: inline-flex;
@@ -37,7 +35,7 @@ button {
 }
 
 button:hover{
-  background-color: #BF5F54;
+  background-color: #B81442;
 }
 
 button:focus{
