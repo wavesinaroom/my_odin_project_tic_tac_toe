@@ -1,5 +1,4 @@
 documentBody = document.body;
-documentBody.className = "body";
 const PlayerToken={
   even: Symbol("even"),
   odd: Symbol("odd"),

@@ -10,13 +10,13 @@ body
   color:#E8D91A;
   font-family: 'Advent Pro';
   font-size: 24px;
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
 body > :first-child{
-  margin-top: 275px;
+  margin-top: 275px; *
 }
 
 button {
@@ -54,9 +54,6 @@ button:active{
   background-color:#9C022D;
 }
 
-.welcomePanel:first-child
-{
-}
 
 .welcomePanel>button
 {
@@ -65,8 +62,5 @@ button:active{
 
 
 
-.setUpPanelDiv:first-child {
-  
-}
 
 /*026d8d*/
