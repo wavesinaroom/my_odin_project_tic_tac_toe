@@ -1,5 +1,5 @@
 documentBody = document.body;
-
+documentBody.className = "body";
 const PlayerToken={
   even: Symbol("even"),
   odd: Symbol("odd"),
@@ -151,7 +151,6 @@ const GameManager = (()=>{
       return;
     }
 
-    // TODO: Write code for tie game
     tileCount=0;
 
     for(row=0; row<board.length; ++row)
@@ -357,6 +356,9 @@ const MainPanel = (() => {
       setUpPanelDiv.className = "setUpPanelDiv";
       documentBody.appendChild(setUpPanelDiv);
 
+      let playersNameDiv = document.createElement('div');
+      setUpPanelDiv.appendChild(playersNameDiv);
+
       let playerOneNameInput;
       let playerTwoNameInput;
 
@@ -385,8 +387,8 @@ const MainPanel = (() => {
       playerTwoNameInput.label = 'Player Two Name:';
       playerTwoDiv.appendChild(playerTwoNameInput);
 
-      setUpPanelDiv.appendChild(playerOneDiv);
-      setUpPanelDiv.appendChild(playerTwoDiv);
+      playersNameDiv.appendChild(playerOneDiv);
+      playersNameDiv.appendChild(playerTwoDiv);
 
       let createGameButton = document.createElement('button');
       createGameButton.textContent = "Start Game";

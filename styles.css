@@ -10,23 +10,31 @@ body
   color:#E8D91A;
   font-family: 'Advent Pro';
   font-size: 24px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+body > :first-child{
+  margin-top: 275px;
 }
 
 button {
   align-items: center;
   background-color: #E81A55;
-  border: none;
+  border: 10px;
   border-radius: 8px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
   color:#fff;
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
+  font-size: 30px;
   font-weight: bolder;
   justify-content: center;
   line-height: 1.1;
-  min-height: 44px;
-  min-width: 10ch;
+  min-height: 54px;
+  min-width: 12ch;
   padding: 0.25em , 0.75em;
   text-align: center;
   transition: 220ms;
@@ -46,10 +54,19 @@ button:active{
   background-color:#9C022D;
 }
 
-.welcomePanelDiv {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.welcomePanel:first-child
+{
+}
+
+.welcomePanel>button
+{
+  margin-top: 100px;
+}
+
+
+
+.setUpPanelDiv:first-child {
+  
 }
 
 /*026d8d*/
