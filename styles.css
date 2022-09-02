@@ -16,7 +16,7 @@ body
 }
 
 body > :first-child{
-  margin-top: 275px; *
+  margin-top: 330px; 
 }
 
 button {
@@ -54,10 +54,17 @@ button:active{
   background-color:#9C022D;
 }
 
+.welcomePanel{
+ display:flex;
+ align-items:center;
+ flex-direction:column;
+}
+
+
 
 .welcomePanel>button
 {
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 
