@@ -1,7 +1,6 @@
 :root{
   box-sizing: border-box;
 }
-
 body
 {
   background-image: url(./images/background_1.jpg);
@@ -38,6 +37,7 @@ button {
   padding: 0.25em , 0.75em;
   text-align: center;
   transition: 220ms;
+  margin-top: 150px;
 }
 
 button:hover{
@@ -61,13 +61,3 @@ button:active{
 }
 
 
-
-.welcomePanel>button
-{
-  margin-top: 150px;
-}
-
-
-
-
-/*026d8d*/
