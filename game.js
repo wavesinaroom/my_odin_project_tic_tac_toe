@@ -219,11 +219,14 @@ const GameBoard = (()=>{
 
     let onClickNumber;
     let numbersOnBoard=[];
+
+
+    let boardCells = document.createElement('div');
+    boardDiv.appendChild(boardCells);
+
     //Tiles
     for(let row = 0; row < gameBoardSize; ++row)
     {
-      let boardRow = document.createElement('td');
-      boardRow.className = "boardRow";
       for(let col = 0; col < gameBoardSize; ++col)
       {
         board[row][col] = Tile(0, PlayerToken.none, document.createElement('td'));
@@ -253,9 +256,8 @@ const GameBoard = (()=>{
             numbersOnBoard.push(onClickNumber);
           }
         });
-        boardRow.appendChild(board[row][col].htmlTile);
+        boardCells.appendChild(board[row][col].htmlTile);
       }
-      boardDiv.appendChild(boardRow);
     }
 
     //Turn Display

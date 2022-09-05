@@ -78,3 +78,11 @@ button:active{
  margin-top: 3vh; 
 }
 
+.boardDiv  {
+}
+
+.boardDiv :last-child{
+ display: grid; 
+ grid-template-columns: repeat(3, 1fr);
+ grid-template-rows: repeat(3, 1fr);
+}
