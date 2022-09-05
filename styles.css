@@ -93,7 +93,7 @@ button,.boardDiv :last-child > * {
  border: solid;
  border-radius: 10px;
  border-color: #E8D91A;
- margin: 0.5em;
+ margin: 0.12em;
  padding: 100px;
  display:inline-flex;
  justify-content: center;
@@ -106,8 +106,9 @@ button,.boardDiv :last-child > * {
 
 .boardDiv :last-child > *:active{
  box-shadow: 0 0 0 2px;
- background-color: transparent;
  filter:opacity(100%);
- outline-color: #E63C0E;
+ outline-color: #E81A55;
+ color: #E81A55;
  outline-style: solid;
+ font-size: 34px;
 }
