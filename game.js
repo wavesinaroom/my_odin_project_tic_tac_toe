@@ -193,10 +193,17 @@ const GameBoard = (()=>{
     boardDiv.className = "boardDiv";
     documentBody.appendChild(boardDiv);
 
-    let instructionsHTML = document.createElement('h3');
-    instructionsHTML.className = "boardDiv";
-    instructionsHTML.textContent = "Pick a number from the digits below your name and click on a cell to put your number into. A Row, a column or a diagonal must sum up to 15 to win";
-    boardDiv.appendChild(instructionsHTML);
+    let instructionsOne = document.createElement('h3');
+    instructionsOne.className = "boardDiv";
+    instructionsOne.textContent = 'Pick a number from the digits below your name and click on a cell to put your number into.';
+    boardDiv.appendChild(instructionsOne);
+
+
+    let instructionsTwo = document.createElement('h3');
+    instructionsTwo.className = "boardDiv";
+    instructionsTwo.textContent = 'A Row, a column or a diagonal must sum up to 15 to win';
+    boardDiv.appendChild(instructionsTwo);
+
 
     let notificationsHTML = document.createElement('h3');
     notificationsHTML.className = "boardDiv";
