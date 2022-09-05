@@ -231,7 +231,6 @@ const GameBoard = (()=>{
       {
         board[row][col] = Tile(0, PlayerToken.none, document.createElement('td'));
         board[row][col].htmlTile.className = "boardTile";
-        board[row][col].htmlTile.textContent = "Yo";
         board[row][col].htmlTile.addEventListener('click', ()=>{
 
           if(board[row][col].tileToken!=undefined)

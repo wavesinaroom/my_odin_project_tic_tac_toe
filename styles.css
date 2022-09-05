@@ -33,7 +33,6 @@ button {
   border-radius: 8px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
   color:#fff;
-  cursor: pointer;
   display: inline-flex;
   font-family: inherit;
   font-size: 30px;
@@ -44,7 +43,6 @@ button {
   min-width: 12ch;
   padding: 0.25em , 0.75em;
   text-align: center;
-  transition: 220ms;
   margin-top: 150px;
 }
 
@@ -62,6 +60,10 @@ button:active{
   background-color:#9C022D;
 }
 
+button,.boardDiv :last-child > * {
+ cursor: pointer;
+ transition: 220ms;
+}
 .welcomePanel{
  display:flex;
  align-items:center;
@@ -84,5 +86,28 @@ button:active{
 .boardDiv :last-child{
  display: grid; 
  grid-template-columns: repeat(3, 1fr);
- grid-template-rows: repeat(3, 1fr);
+ grid-template-rows: repeat(3, 1fr):
+}
+
+.boardDiv :last-child > * {
+ border: solid;
+ border-radius: 10px;
+ border-color: #E8D91A;
+ margin: 0.5em;
+ padding: 100px;
+ display:inline-flex;
+ justify-content: center;
+}
+
+.boardDiv :last-child > *:hover{
+ filter: opacity(50%);
+}
+
+
+.boardDiv :last-child > *:active{
+ box-shadow: 0 0 0 2px;
+ background-color: transparent;
+ filter:opacity(100%);
+ outline-color: #E63C0E;
+ outline-style: solid;
 }
