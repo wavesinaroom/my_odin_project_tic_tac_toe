@@ -352,7 +352,7 @@ const MainPanel = (() => {
       documentBody.removeChild(welcomePanelDiv);
 
       let setUpPanelDiv = document.createElement('div');
-      setUpPanelDiv.className = "setUpPanelDiv";
+      setUpPanelDiv.className = "setUpPanel";
       documentBody.appendChild(setUpPanelDiv);
 
       let playersNameDiv = document.createElement('div');
@@ -364,7 +364,7 @@ const MainPanel = (() => {
       let playerOneDiv =  document.createElement('div');
       playersNameDiv.appendChild(playerOneDiv);
 
-      let playerOneNameInputLabel = document.createElement('h3');
+      let playerOneNameInputLabel = document.createElement('h2');
       playerOneNameInputLabel.innerHTML =  "Player one name: ";
       playerOneDiv.appendChild(playerOneNameInputLabel);
 
@@ -375,7 +375,7 @@ const MainPanel = (() => {
       let playerTwoDiv =  document.createElement('div');
       playersNameDiv.appendChild(playerTwoDiv);
 
-      let playerTwoNameInputLabel = document.createElement('h3');
+      let playerTwoNameInputLabel = document.createElement('h2');
       playerTwoNameInputLabel.innerHTML =  "Player two name: ";
       playerTwoDiv.appendChild(playerTwoNameInputLabel);
 

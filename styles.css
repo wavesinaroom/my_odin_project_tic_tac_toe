@@ -60,4 +60,6 @@ button:active{
  flex-direction:column;
 }
 
-
+.setUpPanel div > *{
+ margin-top: 5vh; 
+}
