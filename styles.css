@@ -64,6 +64,13 @@ button,.boardDiv :last-child > *, .playersArea .player > :last-child > * {
  cursor: pointer;
  transition: 220ms;
 }
+
+input{
+    min-height:1em;
+    min-width:3em;
+    font-size:26px;
+}
+
 .welcomePanel, .boardDiv:first-child{
  display:flex;
  align-items:center;
@@ -111,7 +118,6 @@ button,.boardDiv :last-child > *, .playersArea .player > :last-child > * {
 .boardDiv :last-child > *:active, .playersArea .player > :last-child>*:active{
  box-shadow: 0 0 0 2px;
  filter:opacity(100%);
- outline-color: #E81A55;
  color: #E81A55;
  outline-style: solid;
 }
@@ -146,3 +152,6 @@ button,.boardDiv :last-child > *, .playersArea .player > :last-child > * {
  outline-color:#E8D91A;
 }
 
+.winnerDiv :first-child{
+ font-size:60px;
+}

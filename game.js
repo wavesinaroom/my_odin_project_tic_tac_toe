@@ -314,7 +314,7 @@ const GameBoard = (()=>{
     winnerDiv.className = "winnerDiv";
     documentBody.appendChild(winnerDiv);
 
-    let winnerDisplay = document.createElement('p');
+    let winnerDisplay = document.createElement('h1');
     winnerDisplay.className = "winnerDisplay";
     winnerDisplay.textContent = GameManager.playerInTurn.name + " wins";
     winnerDiv.appendChild(winnerDisplay);
