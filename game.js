@@ -208,7 +208,7 @@ const GameBoard = (()=>{
 
 
     let notificationsHTML = document.createElement('h3');
-    boardDiv.appendChild(notificationsHTML);
+    instructions.appendChild(notificationsHTML);
 
     playersAreaDiv = document.createElement('div');
     playersAreaDiv.className = "playersArea";

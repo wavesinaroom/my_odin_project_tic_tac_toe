@@ -80,7 +80,9 @@ button,.boardDiv :last-child > * {
  margin-top: 3vh; 
 }
 
-.boardDiv  {
+.boardDiv:first-child{
+ flex-direction:column;
+ align-items:center;
 }
 
 .boardDiv :last-child{
