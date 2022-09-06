@@ -80,10 +80,18 @@ button,.boardDiv :last-child > * {
  margin-top: 3vh; 
 }
 
-.boardDiv :last-child{
+
+.boardDiv :first-child > :last-child{
+ transition:220ms; 
+ color: #E81A55;
+ font-size: 34px;
+}
+
+.boardDiv .boardCells{
  display: grid; 
  grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
-}
+ }
+
 .boardDiv :last-child > * {
  border: solid;
  border-radius: 10px;
@@ -98,7 +106,6 @@ button,.boardDiv :last-child > * {
 .boardDiv :last-child > *:hover{
  filter: opacity(50%);
 }
-
 
 .boardDiv :last-child > *:active{
  box-shadow: 0 0 0 2px;

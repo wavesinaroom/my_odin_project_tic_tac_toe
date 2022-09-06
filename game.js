@@ -222,6 +222,7 @@ const GameBoard = (()=>{
 
 
     let boardCells = document.createElement('div');
+    boardCells.className = "boardCells";
     boardDiv.appendChild(boardCells);
 
     //Tiles
