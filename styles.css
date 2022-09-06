@@ -104,11 +104,11 @@ button,.boardDiv :last-child > * {
  font-size: 34px;
 }
 
-.boardDiv :last-child > *:hover{
+.boardDiv :last-child > *:hover, .playersArea .player > :last-child>*:hover{
  filter: opacity(50%);
 }
 
-.boardDiv :last-child > *:active{
+.boardDiv :last-child > *:active, .playersArea .player > :last-child>*:active{
  box-shadow: 0 0 0 2px;
  filter:opacity(100%);
  outline-color: #E81A55;
@@ -128,13 +128,19 @@ button,.boardDiv :last-child > * {
  margin: 3em;
 }
 
+.playersArea .player :first-child{
+ padding: 1em;    
+}
+
 .playersArea .player > :last-child{
  flex-direction:row;
 }
 
-.playersArea .player > :first-child, .playersArea .player > :last-child > * {
+.playersArea .player > :last-child > * {
  border-radius: 8px;
- background-color:white;
- padding: 40px;
- margin: 0.12em;
+ padding: 35px;
+ margin: 0.7em;
+ outline-style: solid;
+ transition: 220ms;
 }
+
