@@ -280,15 +280,6 @@ const GameBoard = (()=>{
       playerNameHTML.textContent = player.name;
       playerHTML.appendChild(playerNameHTML);
 
-      let playerTokenHTML = document.createElement('h3');
-      if(player.token==PlayerToken.even)
-      {
-        playerTokenHTML.textContent = "Even";
-      }else{
-        playerTokenHTML.textContent = "Odd";
-      }
-      playerHTML.appendChild(playerTokenHTML);
-
       let playerNumbersArrayHTML = document.createElement('div');
       playerNumbersArrayHTML.className = "playerNumbers";
       playerHTML.appendChild(playerNumbersArrayHTML);

@@ -115,3 +115,8 @@ button,.boardDiv :last-child > * {
  color: #E81A55;
  outline-style: solid;
 }
+
+.playersAreaDiv {
+ display:flex;
+ flex-direction:column;
+}
