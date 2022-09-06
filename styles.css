@@ -50,10 +50,10 @@ button:hover{
   background-color: #B81442;
 }
 
-button:focus{
+button:focus, input:focus{
   box-shadow: 0 0 0 2px;
   outline-style: solid;
-  outline-color: transparent;
+  outline-color: white;
 }
 
 button:active{
@@ -64,7 +64,7 @@ button,.boardDiv :last-child > * {
  cursor: pointer;
  transition: 220ms;
 }
-.welcomePanel{
+.welcomePanel, .boardDiv:first-child{
  display:flex;
  align-items:center;
  flex-direction:column;
@@ -80,17 +80,10 @@ button,.boardDiv :last-child > * {
  margin-top: 3vh; 
 }
 
-.boardDiv:first-child{
- flex-direction:column;
- align-items:center;
-}
-
 .boardDiv :last-child{
  display: grid; 
- grid-template-columns: repeat(3, 1fr);
- grid-template-rows: repeat(3, 1fr):
+ grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
 }
-
 .boardDiv :last-child > * {
  border: solid;
  border-radius: 10px;
