@@ -85,6 +85,7 @@ button,.boardDiv :last-child > * {
  transition:220ms; 
  color: #E81A55;
  font-size: 34px;
+ font-weight: bolder;
 }
 
 .boardDiv .boardCells{
