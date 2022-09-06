@@ -249,7 +249,7 @@ const GameBoard = (()=>{
           {
             board[row][col].htmlTile.textContent = onClickNumber;
             board[row][col].htmlTile.style.color = '#E81A55';
-            board[row][col].htmlTile.style.backgroundColor = '#E8D91A';
+            board[row][col].htmlTile.style.backgroundColor = '#EBE189';
             board[row][col].htmlTile.style.backdropFilter = 'opacity(20%)';
             board[row][col].tileValue = onClickNumber;
             board[row][col].tileToken = GameManager.playerInTurn.token;
