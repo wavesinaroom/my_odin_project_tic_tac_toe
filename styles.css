@@ -60,7 +60,7 @@ button:active{
   background-color:#9C022D;
 }
 
-button,.boardDiv :last-child > * {
+button,.boardDiv :last-child > *, .playersArea .player > :last-child > * {
  cursor: pointer;
  transition: 220ms;
 }
@@ -120,7 +120,7 @@ button,.boardDiv :last-child > * {
  display:flex;
  flex-direction:row;
  align-items:center;
- margin-top: 5vh;
+ margin-top:3vh;
 }
 
 .playersArea .player{
@@ -137,10 +137,12 @@ button,.boardDiv :last-child > * {
 }
 
 .playersArea .player > :last-child > * {
+ background-color:#EBE189;
  border-radius: 8px;
+ color: #E81A55;
  padding: 35px;
  margin: 0.7em;
  outline-style: solid;
- transition: 220ms;
+ outline-color:#E8D91A;
 }
 

@@ -257,6 +257,7 @@ const GameBoard = (()=>{
             GameManager.ManageGameTurn(board);
             turnDisplayHTML.textContent = GameManager.playerInTurn.name;
             numbersOnBoard.push(onClickNumber);
+            document.getElementById(onClickNumber).remove();
           }
         });
         boardCells.appendChild(board[row][col].htmlTile);
@@ -288,6 +289,7 @@ const GameBoard = (()=>{
       {
         let playerNumberHTML = document.createElement('h3');
         playerNumberHTML.textContent = player.numbers[i];
+        playerNumberHTML.id = player.numbers[i].toString();
         playerNumberHTML.addEventListener("click", () =>{
           if(player!=GameManager.playerInTurn)
           {
