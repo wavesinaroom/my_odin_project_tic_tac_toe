@@ -97,7 +97,7 @@ button,.boardDiv :last-child > * {
  border: solid;
  border-radius: 10px;
  border-color: #E8D91A;
- margin: 0.12em;
+ margin: 0.20em;
  padding: 100px;
  display:inline-flex;
  justify-content: center;
@@ -116,7 +116,25 @@ button,.boardDiv :last-child > * {
  outline-style: solid;
 }
 
-.playersAreaDiv {
+.playersArea {
  display:flex;
- flex-direction:column;
+ flex-direction:row;
+ align-items:center;
+ margin-top: 5vh;
+}
+
+.playersArea .player{
+ align-items:flex-start;
+ margin: 3em;
+}
+
+.playersArea .player > :last-child{
+ flex-direction:row;
+}
+
+.playersArea .player > :first-child, .playersArea .player > :last-child > * {
+ border-radius: 8px;
+ background-color:white;
+ padding: 40px;
+ margin: 0.12em;
 }
